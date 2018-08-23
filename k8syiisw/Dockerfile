@@ -51,10 +51,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     && mkdir -p /data/wwwroot \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
-    && composer self-update --clean-backups \
-    && composer install --no-dev \
-          && composer dump-autoload -o \
-          && composer clearcache
+    && composer self-update --clean-backups
 
 #ADD . /data/wwwroot/yiisw
 #
