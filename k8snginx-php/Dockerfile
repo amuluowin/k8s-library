@@ -23,5 +23,7 @@ RUN chmod a+x /etc/service/fpm/run
 ADD ./nginx.conf /etc/nginx/nginx.conf
 ADD ./default.conf /etc/nginx/conf.d/default.conf
 
+WORKDIR /data
+
 EXPOSE 80
 CMD ["runsvdir", "/etc/service"]

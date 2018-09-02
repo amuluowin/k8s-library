@@ -31,7 +31,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 
     && docker-php-ext-install pdo_mysql bcmath sockets\
 
-    && wget https://github.com/swoole/swoole-src/archive/v4.0.4.tar.gz -O swoole.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v4.1.0.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm swoole.tar.gz \
@@ -53,9 +53,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     && mv composer.phar /usr/local/bin/composer \
     && composer self-update --clean-backups
 
-#ADD . /data/wwwroot/yiisw
-#
-#WORKDIR /data/wwwroot/yiisw
+WORKDIR /data/wwwroot/yiisw
 
 EXPOSE 80
 
