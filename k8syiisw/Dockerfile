@@ -29,7 +29,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
 
-    && docker-php-ext-install pdo_mysql bcmath sockets\
+    && docker-php-ext-install pdo_mysql bcmath sockets SeasLog\
 
     && wget https://github.com/swoole/swoole-src/archive/v4.2.1.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
@@ -43,7 +43,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
         && make install \
     ) \
     && rm -r swoole \
-    && docker-php-ext-enable swoole \
+    && docker-php-ext-enable swoole && pecl clear-cache\
 
     && apk del .build-deps \
     && apk del --purge *-dev \
