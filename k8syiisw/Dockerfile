@@ -43,7 +43,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
         && make install \
     ) \
     && rm -r swoole \
-    && docker-php-ext-enable swoole && pecl clear-cache\
+    && docker-php-ext-enable swoole seaslog && pecl clear-cache\
 
     && apk del .build-deps \
     && apk del --purge *-dev \
