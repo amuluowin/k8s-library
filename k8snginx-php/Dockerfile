@@ -29,7 +29,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     mkdir -p /run/nginx \
     && apk del .build-deps \
     && apk del --purge *-dev \
-    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man && pecl clear-cache\
+    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man && pecl clear-cache
 
 ADD ./nginx.service /etc/service/nginx/run
 RUN chmod a+x /etc/service/nginx/run
