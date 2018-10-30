@@ -21,6 +21,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     apk add --no-cache --virtual tzdata runit nginx bash && \
     apk add --no-cache --virtual \
         freetype-dev \
+        gd-dev \
         libjpeg-turbo-dev \
         libpng-dev &&\
     cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
