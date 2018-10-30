@@ -8,6 +8,7 @@ ENV TIMEZONE Asia/Shanghai
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
     apk update \
     && apk add --no-cache --virtual .build-deps \
+    autoconf \
     build-base \
     binutils \
     libmcrypt-dev \
@@ -23,6 +24,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     echo "${TIMEZONE}" > /etc/timezone && \
     sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /usr/local/etc/php-fpm.conf && \
     sed -i -e "s/listen\s*=\s*127.0.0.1:9000/listen = 9000/g" /usr/local/etc/php-fpm.d/www.conf && \
+    docker-php-ext-install -j$(nproc) iconv &&\
     docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir &&\
     docker-php-ext-install -j$(nproc) gd &&\
     docker-php-ext-install pdo_mysql bcmath sockets opcache && pecl install xdebug &&\
