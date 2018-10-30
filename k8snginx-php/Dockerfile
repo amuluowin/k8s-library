@@ -20,12 +20,12 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     libc-dev \
     linux-headers \
     libaio-dev \
-    && apk add tzdata runit nginx libpng libpng-dev && \
+    && apk add tzdata runit nginx libpng-dev freetype-dev && \
     cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
     echo "${TIMEZONE}" > /etc/timezone && \
     sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /usr/local/etc/php-fpm.conf && \
     sed -i -e "s/listen\s*=\s*127.0.0.1:9000/listen = 9000/g" /usr/local/etc/php-fpm.d/www.conf && \
-    docker-php-ext-install pdo_mysql bcmath sockets opcache gd && pecl install xdebug &&\
+    docker-php-ext-install pdo_mysql bcmath sockets opcache gd freetype && pecl install xdebug &&\
     mkdir -p /run/nginx \
     && apk del .build-deps \
     && apk del --purge *-dev \
