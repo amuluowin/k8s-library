@@ -5,8 +5,7 @@ MAINTAINER albert <63851587@qq.com>
 ENV TIMEZONE Asia/Shanghai
 
 #基础依赖
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
-    apk update \
+RUN apk update \
     && apk add --no-cache --virtual .build-deps \
     build-base \
     binutils \
@@ -18,12 +17,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     libc-dev \
     linux-headers \
     libaio-dev &&\
-    apk add --no-cache --virtual tzdata runit nginx bash && \
-    apk add --no-cache --virtual \
-        freetype-dev \
-        gd-dev \
-        libjpeg-turbo-dev \
-        libpng-dev &&\
+    apk add --no-cache --virtual tzdata runit nginx bash freetype-dev gd-dev libjpeg-turbo-dev libpng-dev && \
     cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
     echo "${TIMEZONE}" > /etc/timezone && \
     sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /usr/local/etc/php-fpm.conf && \
