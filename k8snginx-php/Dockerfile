@@ -20,8 +20,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     libc-dev \
     linux-headers \
     libaio-dev &&\
-    apk add tzdata runit nginx && \
-    apk add install -y \
+    apk add --no-cache --virtual tzdata runit nginx && \
+    apk add --no-cache --virtual \
         freetype-dev \
         libjpeg-turbo-dev \
         libpng-dev &&\
