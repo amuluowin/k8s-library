@@ -1,4 +1,4 @@
-FROM php:7.1.20-fpm-alpine
+FROM php:7.1-fpm-alpine
 
 MAINTAINER albert <63851587@qq.com>
 
@@ -12,9 +12,9 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     echo "${TIMEZONE}" > /etc/timezone && \
     sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /usr/local/etc/php-fpm.conf && \
     sed -i -e "s/listen\s*=\s*127.0.0.1:9000/listen = 9000/g" /usr/local/etc/php-fpm.d/www.conf && \
-    docker-php-ext-install pdo_mysql bcmath sockets opcache &&\
+    docker-php-ext-install pdo_mysql bcmath sockets opcache && pecl install xdebug &&\
     mkdir -p /run/nginx && \
-    rm -rf /var/cache/apk/*
+    rm -rf /var/cache/apk/* && pecl clear-cache
 
 ADD ./nginx.service /etc/service/nginx/run
 RUN chmod a+x /etc/service/nginx/run
