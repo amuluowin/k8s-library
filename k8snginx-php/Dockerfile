@@ -24,7 +24,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     apk add --no-cache --virtual \
         freetype-dev \
         libjpeg-turbo-dev \
-        libjpeg-dev \
+        libjpeg \
         libpng-dev &&\
     cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
     echo "${TIMEZONE}" > /etc/timezone && \
