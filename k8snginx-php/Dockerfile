@@ -11,15 +11,9 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     autoconf \
     build-base \
     binutils \
-    libmcrypt-dev \
-    gmp-dev \
-    icu-dev \
-    zlib-dev \
     musl \
-    libc-dev \
-    linux-headers \
-    libaio-dev &&\
-    apk add tzdata runit nginx bash freetype-dev gd-dev libjpeg-turbo-dev libpng-dev && \
+    linux-headers &&\
+    apk add tzdata runit nginx bash freetype-dev gd-dev libjpeg-turbo-dev libpng-dev libmcrypt-dev && \
     cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
     echo "${TIMEZONE}" > /etc/timezone && \
     sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /usr/local/etc/php-fpm.conf && \
