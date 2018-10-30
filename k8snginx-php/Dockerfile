@@ -17,7 +17,7 @@ RUN apk update \
     libc-dev \
     linux-headers \
     libaio-dev &&\
-    apk add --no-cache --virtual tzdata runit nginx bash freetype-dev gd-dev libjpeg-turbo-dev libpng-dev && \
+    apk add --no-cache --virtual tzdata runit nginx bash freetype-dev gd-dev libjpeg-turbo-dev libpng-dev libjpeg&& \
     cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
     echo "${TIMEZONE}" > /etc/timezone && \
     sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /usr/local/etc/php-fpm.conf && \
