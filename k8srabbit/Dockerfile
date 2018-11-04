@@ -59,4 +59,4 @@ WORKDIR /data
 
 EXPOSE 80
 
-CMD ["php", "/bin/rabbit", "http:server","start"]
+CMD ["php", "bin/rabbit", "http:server","start"]
