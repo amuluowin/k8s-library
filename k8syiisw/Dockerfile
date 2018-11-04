@@ -16,20 +16,23 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     libc-dev \
     linux-headers \
     libaio-dev \
-    && apk add --no-cache --virtual .deps \
+    && apk add \
     libcurl \
-    ca-certificates \
     tzdata \
     nghttp2-dev \
     hiredis-dev \
     openssl-dev \
-    pcre-dev \
-    perl-dev \
+    freetype-dev \
+    libjpeg-turbo-dev \
+    libpng-dev \
+    libmcrypt-dev \
 
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
 
     && docker-php-ext-install pdo_mysql bcmath sockets && pecl install seaslog\
+    && docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir \
+    && docker-php-ext-install -j$(nproc) gd \
 
     && wget https://github.com/swoole/swoole-src/archive/v4.2.5.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
@@ -44,6 +47,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     ) \
     && rm -r swoole \
     && docker-php-ext-enable swoole seaslog && pecl clear-cache\
+    && echo "swoole.fast_serialize=On" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole-serialize.ini\
 
     && apk del .build-deps \
     && apk del --purge *-dev \
