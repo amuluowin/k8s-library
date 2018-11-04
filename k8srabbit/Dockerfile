@@ -19,7 +19,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     && apk add \
     libcurl \
     tzdata \
-    pcer-dev \
+    pcre-dev \
     perl-dev \
     nghttp2-dev \
     hiredis-dev \
