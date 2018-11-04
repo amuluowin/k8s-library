@@ -50,7 +50,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     && echo "swoole.fast_serialize=On" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole-serialize.ini\
 
     && apk del .build-deps \
-    && apk del --purge *-dev \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
     && mkdir -p /data/wwwroot
 
