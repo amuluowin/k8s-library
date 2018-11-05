@@ -16,7 +16,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     libc-dev \
     linux-headers \
     libaio-dev \
-    && apk add \
+    && apk add --no-cache \
     libcurl \
     tzdata \
     pcre-dev \
@@ -43,7 +43,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     && ( \
         cd swoole \
         && phpize \
-        && ./configure --enable-async-redis --enable-mysqlnd --enable-coroutine --enable-openssl --enable-http2 \
+        && ./configure --enable-async-redis --enable-mysqlnd --enable-openssl --enable-http2 \
         && make -j$(nproc) \
         && make install \
     ) \

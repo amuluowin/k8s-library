@@ -16,7 +16,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     libc-dev \
     linux-headers \
     libaio-dev \
-    && apk add \
+    && apk add --no-cache \
     libcurl \
     tzdata \
     pcre-dev \
