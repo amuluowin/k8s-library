@@ -21,7 +21,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir &&\
     docker-php-ext-install -j$(nproc) gd &&\
     docker-php-ext-install pdo_mysql bcmath sockets opcache && pecl install xdebug nsq &&\
-    && docker-php-ext-enable nsq && pecl clear-cache\
+    docker-php-ext-enable nsq && pecl clear-cache &&\
     mkdir -p /run/nginx \
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man
