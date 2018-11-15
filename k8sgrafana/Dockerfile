@@ -5,4 +5,3 @@ RUN   apt-get update && apt-get install -qq -y git\
       && cp -rf /grafana-chinese/public /usr/share/grafana \
       && rm -rf /grafana-chinese \
       && apt-get autoremove -y
-USER grafana
