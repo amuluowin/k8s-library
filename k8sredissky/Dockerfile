@@ -27,7 +27,8 @@ RUN git clone https://gitee.com/stuinfer/redisSky.git && sed -i "s#Vue.use(VueWe
 
 RUN cd /app/go/src/github.com/prettyyjnic/redisSky/frontend \
     && npm install \
-    && npm run build;
+    && npm run build \
+    && rm -rf node_modules;
 
 RUN cd /app/go/src/github.com/prettyyjnic/redisSky/backend/bin \
     && go build start.go;
