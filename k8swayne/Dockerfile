@@ -11,7 +11,7 @@ ARG RAVEN_DSN
 RUN mkdir -p /workspace \
     && cd /workspace && git clone https://github.com/Qihoo360/wayne.git \
     && sed -i  "s~__ravenDsn__~${RAVEN_DSN}~g" /workspace/wayne/src/frontend/src/environments/environment.prod.ts \
-    && cd /workspace/wayne/src/frontend && npm config set registry https://registry.npm.taobao.org  \
+    && cd /workspace/wayne/src/frontend \
     && npm install  \
     && npm run build
        
