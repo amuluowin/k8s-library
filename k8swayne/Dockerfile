@@ -11,7 +11,7 @@ ARG RAVEN_DSN
 RUN sed -i  "s~__ravenDsn__~${RAVEN_DSN}~g" /workspace/src/environments/environment.prod.ts \
     && git clone https://gitee.com/mirrors/Wayne.git \
     && mkdir -p /workspace \
-    && cp -rf /Wayne/src/frontend /workspace
+    && mv /Wayne/src/frontend /workspace
 
 RUN cd /workspace && \
        npm config set registry https://registry.npm.taobao.org && \
