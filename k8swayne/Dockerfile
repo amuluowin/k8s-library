@@ -8,10 +8,10 @@ FROM 360cloud/wayne-ui-builder:v1.0.0 as frontend
 
 ARG RAVEN_DSN
 
-RUN sed -i  "s~__ravenDsn__~${RAVEN_DSN}~g" /workspace/src/environments/environment.prod.ts \
-    && git clone https://gitee.com/mirrors/Wayne.git \
+RUN git clone https://gitee.com/mirrors/Wayne.git \
     && mkdir -p /workspace \
-    && mv /Wayne/src/frontend /workspace
+    && mv /Wayne/src/frontend /workspace \
+    && sed -i  "s~__ravenDsn__~${RAVEN_DSN}~g" /workspace/src/environments/environment.prod.ts
 
 RUN cd /workspace && \
        npm config set registry https://registry.npm.taobao.org && \
