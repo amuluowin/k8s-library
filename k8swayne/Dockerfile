@@ -8,28 +8,26 @@ FROM 360cloud/wayne-ui-builder:v1.0.0 as frontend
 
 ARG RAVEN_DSN
 
-RUN git clone https://github.com/Qihoo360/wayne.git \
-    && mkdir -p /workspace \
-    && mv ./wayne/src/frontend /workspace \
-    && sed -i  "s~__ravenDsn__~${RAVEN_DSN}~g" /workspace/src/environments/environment.prod.ts
-
-RUN cd /workspace && \
-       npm config set registry https://registry.npm.taobao.org && \
-       npm install && \
-       npm run build
+RUN mkdir -p /workspace \
+    && cd /workspace && git clone https://github.com/Qihoo360/wayne.git \
+    && sed -i  "s~__ravenDsn__~${RAVEN_DSN}~g" /workspace/wayne/src/frontend/src/environments/environment.prod.ts \
+    && cd /workspace/wayne/src/frontend && npm config set registry https://registry.npm.taobao.org  \
+    && npm install  \
+    && npm run build
+       
 
 # build server
 FROM 360cloud/wayne-server-builder:v1.0.0 as backend
 
-COPY --from=frontend /Wayne/src/vendor /go/src/github.com/Qihoo360/wayne/src/vendor
+COPY --from=frontend /workspace/wayne/src/vendor /go/src/github.com/Qihoo360/wayne/src/vendor
 
-COPY --from=frontend /Wayne/src/backend /go/src/github.com/Qihoo360/wayne/src/backend
+COPY --from=frontend /workspace/wayne/src/backend /go/src/github.com/Qihoo360/wayne/src/backend
 
 RUN rm -rf /go/src/github.com/Qihoo360/wayne/src/backend/static
 
-COPY --from=frontend /workspace/dist/ /go/src/github.com/Qihoo360/wayne/src/backend/static/
+COPY --from=frontend /workspace/wayne/src/frontend/dist/ /go/src/github.com/Qihoo360/wayne/src/backend/static/
 
-COPY --from=frontend /workspace/dist/index.html /go/src/github.com/Qihoo360/wayne/src/backend/views/
+COPY --from=frontend /workspace/wayne/src/frontend/dist/index.html /go/src/github.com/Qihoo360/wayne/src/backend/views/
 
 RUN cd /go/src/github.com/Qihoo360/wayne/src/backend && bee generate docs && bee pack -o /_build
 
