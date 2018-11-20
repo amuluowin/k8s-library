@@ -10,7 +10,7 @@ ARG RAVEN_DSN
 
 RUN git clone https://github.com/Qihoo360/wayne.git \
     && mkdir -p /workspace \
-    && mv /Wayne/src/frontend /workspace \
+    && mv ./wayne/src/frontend /workspace \
     && sed -i  "s~__ravenDsn__~${RAVEN_DSN}~g" /workspace/src/environments/environment.prod.ts
 
 RUN cd /workspace && \
