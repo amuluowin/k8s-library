@@ -1,4 +1,4 @@
-FROM python:3.6.6-alpine3.8
+FROM python:alpine
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
       && apk --no-cache add --virtual build-dependencies\

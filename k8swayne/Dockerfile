@@ -8,9 +8,10 @@ FROM 360cloud/wayne-ui-builder:v1.0.0 as frontend
 
 ARG RAVEN_DSN
 
-COPY src/frontend /workspace
-
-RUN sed -i  "s~__ravenDsn__~${RAVEN_DSN}~g" /workspace/src/environments/environment.prod.ts
+RUN sed -i  "s~__ravenDsn__~${RAVEN_DSN}~g" /workspace/src/environments/environment.prod.ts \
+    && git clone https://gitee.com/mirrors/Wayne.git \
+    && mkdir -p /workspace \
+    && cp -rf /Wayne/src/frontend /workspace
 
 RUN cd /workspace && \
        npm config set registry https://registry.npm.taobao.org && \
@@ -20,9 +21,9 @@ RUN cd /workspace && \
 # build server
 FROM 360cloud/wayne-server-builder:v1.0.0 as backend
 
-COPY src/vendor /go/src/github.com/Qihoo360/wayne/src/vendor
+COPY --from=frontend /Wayne/src/vendor /go/src/github.com/Qihoo360/wayne/src/vendor
 
-COPY src/backend /go/src/github.com/Qihoo360/wayne/src/backend
+COPY --from=frontend /Wayne/src/backend /go/src/github.com/Qihoo360/wayne/src/backend
 
 RUN rm -rf /go/src/github.com/Qihoo360/wayne/src/backend/static
 
