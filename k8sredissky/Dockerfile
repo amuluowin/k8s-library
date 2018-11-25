@@ -35,7 +35,7 @@ RUN cd /app/go/src/github.com/prettyyjnic/redisSky/backend/bin \
 
 FROM alpine
 
-RUN apk add --no-cache tzdata && mkdir -p /redisSky && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+RUN apk update && apk add --no-cache tzdata && mkdir -p /redisSky && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
 
 COPY --from=build-dev /app/go/src/github.com/prettyyjnic/redisSky/frontend /redisSky/frontend

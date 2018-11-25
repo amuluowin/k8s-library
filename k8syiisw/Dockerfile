@@ -3,7 +3,7 @@ FROM php:7.1-cli-alpine
 MAINTAINER albert <63851587@qq.com>
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
-    && apk add --no-cache --virtual .build-deps \
+    && apk update && apk add --no-cache --virtual .build-deps \
     g++ \
     gcc \
     autoconf \
