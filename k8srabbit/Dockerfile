@@ -2,8 +2,7 @@ FROM php:7.2-cli-alpine
 
 MAINTAINER albert <63851587@qq.com>
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
-    && apk update && apk add --no-cache --virtual .build-deps \
+RUN apk update && apk add --no-cache --virtual .build-deps \
     g++ \
     gcc \
     autoconf \

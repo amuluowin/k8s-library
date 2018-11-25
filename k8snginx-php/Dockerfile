@@ -5,8 +5,7 @@ MAINTAINER albert <63851587@qq.com>
 ENV TIMEZONE Asia/Shanghai
 
 #基础依赖
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
-    apk update \
+RUN apk update \
     && apk add --no-cache --virtual .build-deps \
     autoconf \
     build-base \

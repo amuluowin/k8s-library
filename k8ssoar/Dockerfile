@@ -1,7 +1,6 @@
 FROM python:alpine
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
-      && apk update && apk --no-cache add --virtual build-dependencies\
+RUN   apk update && apk --no-cache add --virtual build-dependencies\
       build-base \
       git \
       wget \

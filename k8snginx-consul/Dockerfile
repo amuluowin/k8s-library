@@ -1,7 +1,6 @@
 FROM alpine:latest
 MAINTAINER albert <63851587@qq.com>
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 # install nginx runit curl
 RUN apk --update --no-cache add nginx curl runit bash
 
