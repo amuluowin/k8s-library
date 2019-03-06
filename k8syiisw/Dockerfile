@@ -49,7 +49,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
 
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
-    && mkdir -p /data/wwwroot
+    && mkdir -p /data
 
 WORKDIR /data
 

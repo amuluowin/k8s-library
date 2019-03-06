@@ -33,7 +33,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir \
     && docker-php-ext-install -j$(nproc) gd \
 
-    && wget https://github.com/swoole/swoole-src/archive/v4.3.30.tar.gz -O swoole.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v4.3.0.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm swoole.tar.gz \
@@ -49,7 +49,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
 
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
-    && mkdir -p /data/wwwroot
+    && mkdir -p /data
 
 WORKDIR /data
 
