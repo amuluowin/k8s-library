@@ -16,6 +16,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     linux-headers \
     libaio-dev \
     && apk add --no-cache \
+    runit \
     libcurl \
     tzdata \
     pcre-dev \
