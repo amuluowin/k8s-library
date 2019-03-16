@@ -29,7 +29,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
 
-    && docker-php-ext-install pdo_mysql bcmath sockets && pecl install seaslog\
+    && docker-php-ext-install pdo_mysql bcmath opcache sockets && pecl install seaslog\
     && docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir \
     && docker-php-ext-install -j$(nproc) gd \
 
