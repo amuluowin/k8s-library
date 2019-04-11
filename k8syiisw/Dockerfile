@@ -2,6 +2,8 @@ FROM php:7.1-cli-alpine
 
 MAINTAINER albert <63851587@qq.com>
 
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
 RUN apk update && apk add --no-cache --virtual .build-deps \
     g++ \
     gcc \
@@ -49,7 +51,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
 
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
-    && mkdir -p /data
+    && mkdir -p /data && chmod a+x /usr/bin/composer
 
 WORKDIR /data
 

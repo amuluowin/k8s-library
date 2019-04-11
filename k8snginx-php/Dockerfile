@@ -31,6 +31,8 @@ ADD ./fpm.service /etc/service/fpm/run
 RUN chmod a+x /etc/service/fpm/run
 ADD ./nginx.conf /etc/nginx/nginx.conf
 ADD ./default.conf /etc/nginx/conf.d/default.conf
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+RUN chmod a+x /usr/bin/composer
 
 WORKDIR /data
 
