@@ -1,4 +1,4 @@
-FROM php:7.3-cli-alpine
+FROM php:7.2-cli-alpine
 
 MAINTAINER albert <63851587@qq.com>
 
