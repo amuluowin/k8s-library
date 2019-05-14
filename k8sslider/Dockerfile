@@ -44,7 +44,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && ( \
         cd swoole \
         && phpize \
-        && ./configure --enable-async-redis --enable-mysqlnd --enable-openssl --enable-http2 \
+        && ./configure --enable-mysqlnd --enable-openssl --enable-http2 \
         && make -j$(nproc) \
         && make install \
     ) \
