@@ -4,6 +4,8 @@ MAINTAINER albert <63851587@qq.com>
 
 ENV TIMEZONE Asia/Shanghai
 
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
 #基础依赖
 RUN apk update \
     && apk add --no-cache --virtual .build-deps \
