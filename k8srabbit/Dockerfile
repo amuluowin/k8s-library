@@ -13,13 +13,13 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     gmp-dev \
     icu-dev \
     zlib-dev \
-    musl \
     libc-dev \
     linux-headers \
     libaio-dev \
     && apk add --no-cache \
     runit \
     libcurl \
+    yaml-dev \
     tzdata \
     pcre-dev \
     perl-dev \
@@ -32,7 +32,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
 
-    && docker-php-ext-install pdo_mysql bcmath opcache sockets && pecl install seaslog msgpack\
+    && docker-php-ext-install pdo_mysql bcmath opcache sockets && pecl install seaslog msgpack yaml\
     && docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir \
     && docker-php-ext-install -j$(nproc) gd \
 
@@ -48,7 +48,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && make install \
     ) \
     && rm -r swoole \
-    && docker-php-ext-enable swoole seaslog msgpack && pecl clear-cache\
+    && docker-php-ext-enable swoole seaslog msgpack yaml && pecl clear-cache\
 
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
