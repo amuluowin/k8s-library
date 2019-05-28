@@ -19,6 +19,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && apk add --no-cache \
     runit \
     libcurl \
+    libxml2-dev \
     yaml-dev \
     tzdata \
     pcre-dev \
