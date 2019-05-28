@@ -35,6 +35,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && docker-php-ext-install pdo_mysql bcmath opcache sockets && pecl install seaslog msgpack yaml\
     && docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir \
     && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-install -j$(nproc) soap \
 
     && wget https://github.com/swoole/swoole-src/archive/v4.3.4.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
