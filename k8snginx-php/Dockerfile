@@ -28,7 +28,8 @@ RUN apk update \
     docker-php-ext-enable seaslog mysqli && pecl clear-cache &&\
     mkdir -p /run/nginx \
     && apk del .build-deps \
-    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man
+    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
+    && umask 0000
 
 ADD ./nginx.service /etc/service/nginx/run
 RUN chmod a+x /etc/service/nginx/run
