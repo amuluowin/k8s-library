@@ -13,33 +13,34 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     autoconf \
     make \
     libmcrypt-dev \
-    gmp-dev \
     icu-dev \
     zlib-dev \
     libc-dev \
     linux-headers \
     libaio-dev \
+    tzdata \
+    git \
     && apk add --no-cache \
-    runit \
     libcurl \
     yaml-dev \
-    tzdata \
     pcre-dev \
     perl-dev \
     openssl-dev \
     freetype-dev \
     libjpeg-turbo-dev \
     libpng-dev \
+    libzip-dev \
+    libmcrypt-dev \
+    gmp-dev \
 
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
 
-    && docker-php-ext-install pdo_mysql bcmath opcache sockets && pecl install msgpack yaml inotify\
+    && docker-php-ext-install pdo_mysql bcmath opcache sockets zip gmp && pecl install msgpack yaml seaslog inotify\
     && docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir \
     && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-install -j$(nproc) soap \
 
-    && wget https://github.com/swoole/swoole-src/archive/v4.4.0.tar.gz -O swoole.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v4.4.7.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm swoole.tar.gz \
@@ -51,7 +52,31 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && make install \
     ) \
     && rm -r swoole \
-    && docker-php-ext-enable swoole msgpack yaml inotify && pecl clear-cache\
+    
+    && wget https://github.com/mabu233/sdebug/archive/sdebug_2_7-beta.tar.gz -O sdebug.tar.gz \
+    && mkdir -p sdebug \
+    && tar -xf sdebug.tar.gz -C sdebug --strip-components=1 \
+    && rm sdebug.tar.gz \
+    && (\
+        cd sdebug \
+        && phpize \
+        && ./configure --enable-xdebug \
+        && make -j$(nproc) \
+        && make install \
+    ) \
+    && rm -r sdebug \
+    
+    && git clone https://github.com/osgochina/donkeyid.git \
+    && (\
+        cd donkeyid/donkeyid \
+        && phpize \
+        && ./configure \
+        && make -j$(nproc) \
+        && make install \
+    ) \
+    && rm -r donkeyid \
+    
+    && docker-php-ext-enable swoole msgpack yaml inotify donkeyid && pecl clear-cache\
 
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
@@ -61,4 +86,4 @@ WORKDIR /data
 
 EXPOSE 80
 
-CMD ["php", "bin/rabbit", "httpserver","start"]
+CMD ["php", "bin/rabbit", "server","start"]
