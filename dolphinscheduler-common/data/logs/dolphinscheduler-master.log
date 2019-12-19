@@ -1,0 +1,138 @@
+[INFO] 2019-12-19 15:08:18.519 org.apache.dolphinscheduler.server.zk.ZKMasterClient:[227] - master node added : /dolphinscheduler/masters/192.168.16.5_0000000007
+[INFO] 2019-12-19 15:16:01.670 org.apache.dolphinscheduler.server.zk.ZKMasterClient:[227] - master node added : /dolphinscheduler/masters/192.168.32.5_0000000008
+[INFO] 2019-12-19 15:26:31.026 org.apache.dolphinscheduler.server.zk.ZKMasterClient:[227] - master node added : /dolphinscheduler/masters/192.168.64.5_0000000009
+[INFO] 2019-12-19 15:26:33.214 org.apache.dolphinscheduler.server.zk.ZKMasterClient:[350] - node added : /dolphinscheduler/workers/null_0000000006
+[INFO] 2019-12-19 15:37:25.493 org.apache.dolphinscheduler.server.zk.ZKMasterClient:[227] - master node added : /dolphinscheduler/masters/192.168.96.5_0000000000
+[INFO] 2019-12-19 15:37:29.195 org.apache.dolphinscheduler.server.zk.ZKMasterClient:[350] - node added : /dolphinscheduler/workers/null_0000000000
+[ERROR] 2019-12-19 15:38:16.722 org.apache.dolphinscheduler.server.master.runner.MasterSchedulerThread:[134] - master scheduler thread exception : nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+### The error may exist in org/apache/dolphinscheduler/dao/mapper/CommandMapper.xml
+### The error may involve org.apache.dolphinscheduler.dao.mapper.CommandMapper.getOneToRun
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+### The error may exist in org/apache/dolphinscheduler/dao/mapper/CommandMapper.xml
+### The error may involve org.apache.dolphinscheduler.dao.mapper.CommandMapper.getOneToRun
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:78)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:440)
+	at com.sun.proxy.$Proxy85.selectOne(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectOne(SqlSessionTemplate.java:159)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:89)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:61)
+	at com.sun.proxy.$Proxy93.getOneToRun(Unknown Source)
+	at org.apache.dolphinscheduler.dao.ProcessDao.findOneCommand(ProcessDao.java:196)
+	at org.apache.dolphinscheduler.dao.ProcessDao$$FastClassBySpringCGLIB$$ee5e71ba.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:684)
+	at org.apache.dolphinscheduler.dao.ProcessDao$$EnhancerBySpringCGLIB$$a5dd721a.findOneCommand(<generated>)
+	at org.apache.dolphinscheduler.server.master.runner.MasterSchedulerThread.run(MasterSchedulerThread.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+### The error may exist in org/apache/dolphinscheduler/dao/mapper/CommandMapper.xml
+### The error may involve org.apache.dolphinscheduler.dao.mapper.CommandMapper.getOneToRun
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:149)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:140)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:76)
+	at sun.reflect.GeneratedMethodAccessor102.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:426)
+	... 14 common frames omitted
+Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:81)
+	at org.mybatis.spring.transaction.SpringManagedTransaction.openConnection(SpringManagedTransaction.java:80)
+	at org.mybatis.spring.transaction.SpringManagedTransaction.getConnection(SpringManagedTransaction.java:67)
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:336)
+	at com.baomidou.mybatisplus.core.executor.MybatisSimpleExecutor.prepareStatement(MybatisSimpleExecutor.java:93)
+	at com.baomidou.mybatisplus.core.executor.MybatisSimpleExecutor.doQuery(MybatisSimpleExecutor.java:66)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:324)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:147)
+	... 20 common frames omitted
+Caused by: com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+	at com.alibaba.druid.pool.DruidDataSource.getConnectionInternal(DruidDataSource.java:1429)
+	at com.alibaba.druid.pool.DruidDataSource.getConnectionDirect(DruidDataSource.java:1326)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1306)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1296)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:109)
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:157)
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:115)
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:78)
+	... 30 common frames omitted
+[ERROR] 2019-12-19 15:38:16.734 org.apache.dolphinscheduler.server.master.runner.MasterSchedulerThread:[134] - master scheduler thread exception : nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+### The error may exist in org/apache/dolphinscheduler/dao/mapper/CommandMapper.xml
+### The error may involve org.apache.dolphinscheduler.dao.mapper.CommandMapper.getOneToRun
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+### The error may exist in org/apache/dolphinscheduler/dao/mapper/CommandMapper.xml
+### The error may involve org.apache.dolphinscheduler.dao.mapper.CommandMapper.getOneToRun
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:78)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:440)
+	at com.sun.proxy.$Proxy85.selectOne(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectOne(SqlSessionTemplate.java:159)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:89)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:61)
+	at com.sun.proxy.$Proxy93.getOneToRun(Unknown Source)
+	at org.apache.dolphinscheduler.dao.ProcessDao.findOneCommand(ProcessDao.java:196)
+	at org.apache.dolphinscheduler.dao.ProcessDao$$FastClassBySpringCGLIB$$ee5e71ba.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:684)
+	at org.apache.dolphinscheduler.dao.ProcessDao$$EnhancerBySpringCGLIB$$a5dd721a.findOneCommand(<generated>)
+	at org.apache.dolphinscheduler.server.master.runner.MasterSchedulerThread.run(MasterSchedulerThread.java:112)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+### The error may exist in org/apache/dolphinscheduler/dao/mapper/CommandMapper.xml
+### The error may involve org.apache.dolphinscheduler.dao.mapper.CommandMapper.getOneToRun
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:149)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:140)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:76)
+	at sun.reflect.GeneratedMethodAccessor102.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:426)
+	... 14 common frames omitted
+Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:81)
+	at org.mybatis.spring.transaction.SpringManagedTransaction.openConnection(SpringManagedTransaction.java:80)
+	at org.mybatis.spring.transaction.SpringManagedTransaction.getConnection(SpringManagedTransaction.java:67)
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:336)
+	at com.baomidou.mybatisplus.core.executor.MybatisSimpleExecutor.prepareStatement(MybatisSimpleExecutor.java:93)
+	at com.baomidou.mybatisplus.core.executor.MybatisSimpleExecutor.doQuery(MybatisSimpleExecutor.java:66)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:324)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:147)
+	... 20 common frames omitted
+Caused by: com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Thu Dec 19 15:38:16 CST 2019
+	at com.alibaba.druid.pool.DruidDataSource.getConnectionInternal(DruidDataSource.java:1429)
+	at com.alibaba.druid.pool.DruidDataSource.getConnectionDirect(DruidDataSource.java:1326)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1306)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1296)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:109)
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:157)
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:115)
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:78)
+	... 30 common frames omitted

@@ -1,0 +1,385 @@
+[INFO] 2019-12-19 15:08:08.339 org.apache.dolphinscheduler.api.ApiApplicationServer:[50] - Starting ApiApplicationServer v1.2.0 on 771352bbf9cc with PID 1 (/opt/dolphinscheduler/lib/dolphinscheduler-api-1.2.0.jar started by root in /opt/dolphinscheduler)
+[INFO] 2019-12-19 15:08:08.344 org.apache.dolphinscheduler.api.ApiApplicationServer:[679] - The following profiles are active: api
+[INFO] 2019-12-19 15:08:11.809 org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:[330] - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$f3ee5c72] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO] 2019-12-19 15:08:12.212 org.eclipse.jetty.util.log:[193] - Logging initialized @5698ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO] 2019-12-19 15:08:12.421 org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory:[143] - Server initialized with port: 12345
+[INFO] 2019-12-19 15:08:12.426 org.eclipse.jetty.server.Server:[370] - jetty-9.4.14.v20181114; built: 2018-11-14T21:20:31.478Z; git: c4550056e785fb5665914545889f21dc136ad9e6; jvm 1.8.0_212-b04
+[INFO] 2019-12-19 15:08:12.545 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Initializing Spring embedded WebApplicationContext
+[INFO] 2019-12-19 15:08:12.545 org.springframework.web.context.ContextLoader:[296] - Root WebApplicationContext: initialization completed in 4095 ms
+[INFO] 2019-12-19 15:08:12.626 org.eclipse.jetty.server.session:[365] - DefaultSessionIdManager workerName=node0
+[INFO] 2019-12-19 15:08:12.626 org.eclipse.jetty.server.session:[370] - No SessionScavenger set, using defaults
+[INFO] 2019-12-19 15:08:12.629 org.eclipse.jetty.server.session:[149] - node0 Scavenging every 600000ms
+[INFO] 2019-12-19 15:08:12.639 org.eclipse.jetty.server.handler.ContextHandler:[855] - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@205df5dc{application,/dolphinscheduler,[file:///tmp/jetty-docbase.117114246395902525.12345/, jar:file:/opt/dolphinscheduler/lib/springfox-swagger-ui-2.9.2.jar!/META-INF/resources, jar:file:/opt/dolphinscheduler/lib/swagger-bootstrap-ui-1.9.3.jar!/META-INF/resources],AVAILABLE}
+[INFO] 2019-12-19 15:08:12.641 org.eclipse.jetty.server.Server:[407] - Started @6129ms
+[INFO] 2019-12-19 15:08:15.407 org.apache.dolphinscheduler.common.queue.TaskQueueFactory:[45] - task queue impl use zookeeper 
+[INFO] 2019-12-19 15:08:15.533 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:08:15.675 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:08:15.680 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:08:16.918 springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping:[69] - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+[INFO] 2019-12-19 15:08:17.259 org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor:[171] - Initializing ExecutorService 'applicationTaskExecutor'
+[INFO] 2019-12-19 15:08:18.036 springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper:[160] - Context refreshed
+[INFO] 2019-12-19 15:08:18.076 springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper:[163] - Found 1 custom documentation plugin(s)
+[INFO] 2019-12-19 15:08:18.227 springfox.documentation.spring.web.scanners.ApiListingReferenceScanner:[41] - Scanning for api listing references
+[INFO] 2019-12-19 15:08:18.941 springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator:[40] - Generating unique operation named: viewTreeUsingGET_1
+[INFO] 2019-12-19 15:08:19.043 springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator:[40] - Generating unique operation named: queryResourceListUsingGET_1
+[INFO] 2019-12-19 15:08:19.250 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:08:19.251 org.springframework.web.servlet.DispatcherServlet:[524] - Initializing Servlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:08:19.263 org.springframework.web.servlet.DispatcherServlet:[546] - Completed initialization in 12 ms
+[INFO] 2019-12-19 15:08:19.465 org.eclipse.jetty.server.AbstractConnector:[292] - Started ServerConnector@7d12429{HTTP/1.1,[http/1.1]}{0.0.0.0:12345}
+[INFO] 2019-12-19 15:08:19.470 org.springframework.boot.web.embedded.jetty.JettyWebServer:[159] - Jetty started on port(s) 12345 (http/1.1) with context path '/dolphinscheduler'
+[INFO] 2019-12-19 15:08:19.490 org.apache.dolphinscheduler.api.ApiApplicationServer:[59] - Started ApiApplicationServer in 12.249 seconds (JVM running for 12.978)
+[INFO] 2019-12-19 15:08:37.839 org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor:[208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[INFO] 2019-12-19 15:08:37.865 org.eclipse.jetty.server.AbstractConnector:[341] - Stopped ServerConnector@7d12429{HTTP/1.1,[http/1.1]}{0.0.0.0:12345}
+[INFO] 2019-12-19 15:08:37.866 org.eclipse.jetty.server.session:[167] - node0 Stopped scavenging
+[INFO] 2019-12-19 15:08:37.868 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Destroying Spring FrameworkServlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:08:37.869 org.eclipse.jetty.server.handler.ContextHandler:[1045] - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@205df5dc{application,/dolphinscheduler,[file:///tmp/jetty-docbase.117114246395902525.12345/, jar:file:/opt/dolphinscheduler/lib/springfox-swagger-ui-2.9.2.jar!/META-INF/resources, jar:file:/opt/dolphinscheduler/lib/swagger-bootstrap-ui-1.9.3.jar!/META-INF/resources],UNAVAILABLE}
+[INFO] 2019-12-19 15:14:57.503 org.apache.dolphinscheduler.api.ApiApplicationServer:[50] - Starting ApiApplicationServer v1.2.0 on 771352bbf9cc with PID 1 (/opt/dolphinscheduler/lib/dolphinscheduler-api-1.2.0.jar started by root in /opt/dolphinscheduler)
+[INFO] 2019-12-19 15:14:57.508 org.apache.dolphinscheduler.api.ApiApplicationServer:[679] - The following profiles are active: api
+[INFO] 2019-12-19 15:15:01.019 org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:[330] - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$8fbf0fe4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO] 2019-12-19 15:15:01.774 org.eclipse.jetty.util.log:[193] - Logging initialized @6066ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO] 2019-12-19 15:15:02.708 org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory:[143] - Server initialized with port: 12345
+[INFO] 2019-12-19 15:15:02.713 org.eclipse.jetty.server.Server:[370] - jetty-9.4.14.v20181114; built: 2018-11-14T21:20:31.478Z; git: c4550056e785fb5665914545889f21dc136ad9e6; jvm 1.8.0_212-b04
+[INFO] 2019-12-19 15:15:03.202 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Initializing Spring embedded WebApplicationContext
+[INFO] 2019-12-19 15:15:03.202 org.springframework.web.context.ContextLoader:[296] - Root WebApplicationContext: initialization completed in 5606 ms
+[INFO] 2019-12-19 15:15:04.251 org.eclipse.jetty.server.session:[365] - DefaultSessionIdManager workerName=node0
+[INFO] 2019-12-19 15:15:04.252 org.eclipse.jetty.server.session:[370] - No SessionScavenger set, using defaults
+[INFO] 2019-12-19 15:15:04.256 org.eclipse.jetty.server.session:[149] - node0 Scavenging every 600000ms
+[INFO] 2019-12-19 15:15:04.282 org.eclipse.jetty.server.handler.ContextHandler:[855] - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@5034f5dd{application,/dolphinscheduler,[file:///tmp/jetty-docbase.8925463256855392153.12345/, jar:file:/opt/dolphinscheduler/lib/springfox-swagger-ui-2.9.2.jar!/META-INF/resources, jar:file:/opt/dolphinscheduler/lib/swagger-bootstrap-ui-1.9.3.jar!/META-INF/resources],AVAILABLE}
+[INFO] 2019-12-19 15:15:04.284 org.eclipse.jetty.server.Server:[407] - Started @8578ms
+[INFO] 2019-12-19 15:15:11.312 org.apache.dolphinscheduler.common.queue.TaskQueueFactory:[45] - task queue impl use zookeeper 
+[INFO] 2019-12-19 15:15:51.197 org.apache.dolphinscheduler.api.ApiApplicationServer:[50] - Starting ApiApplicationServer v1.2.0 on 02d1dff262c4 with PID 1 (/opt/dolphinscheduler/lib/dolphinscheduler-api-1.2.0.jar started by root in /opt/dolphinscheduler)
+[INFO] 2019-12-19 15:15:51.202 org.apache.dolphinscheduler.api.ApiApplicationServer:[679] - The following profiles are active: api
+[INFO] 2019-12-19 15:15:54.950 org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:[330] - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$31408192] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO] 2019-12-19 15:15:55.600 org.eclipse.jetty.util.log:[193] - Logging initialized @6206ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO] 2019-12-19 15:15:55.886 org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory:[143] - Server initialized with port: 12345
+[INFO] 2019-12-19 15:15:55.891 org.eclipse.jetty.server.Server:[370] - jetty-9.4.14.v20181114; built: 2018-11-14T21:20:31.478Z; git: c4550056e785fb5665914545889f21dc136ad9e6; jvm 1.8.0_212-b04
+[INFO] 2019-12-19 15:15:56.003 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Initializing Spring embedded WebApplicationContext
+[INFO] 2019-12-19 15:15:56.004 org.springframework.web.context.ContextLoader:[296] - Root WebApplicationContext: initialization completed in 4679 ms
+[INFO] 2019-12-19 15:15:56.104 org.eclipse.jetty.server.session:[365] - DefaultSessionIdManager workerName=node0
+[INFO] 2019-12-19 15:15:56.104 org.eclipse.jetty.server.session:[370] - No SessionScavenger set, using defaults
+[INFO] 2019-12-19 15:15:56.107 org.eclipse.jetty.server.session:[149] - node0 Scavenging every 660000ms
+[INFO] 2019-12-19 15:15:56.117 org.eclipse.jetty.server.handler.ContextHandler:[855] - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@79aee22a{application,/dolphinscheduler,[file:///tmp/jetty-docbase.4578194760253346579.12345/, jar:file:/opt/dolphinscheduler/lib/springfox-swagger-ui-2.9.2.jar!/META-INF/resources, jar:file:/opt/dolphinscheduler/lib/swagger-bootstrap-ui-1.9.3.jar!/META-INF/resources],AVAILABLE}
+[INFO] 2019-12-19 15:15:56.118 org.eclipse.jetty.server.Server:[407] - Started @6727ms
+[INFO] 2019-12-19 15:15:59.151 org.apache.dolphinscheduler.common.queue.TaskQueueFactory:[45] - task queue impl use zookeeper 
+[INFO] 2019-12-19 15:15:59.275 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:15:59.378 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:15:59.386 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:16:00.547 springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping:[69] - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+[INFO] 2019-12-19 15:16:00.853 org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor:[171] - Initializing ExecutorService 'applicationTaskExecutor'
+[INFO] 2019-12-19 15:16:01.471 springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper:[160] - Context refreshed
+[INFO] 2019-12-19 15:16:01.514 springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper:[163] - Found 1 custom documentation plugin(s)
+[INFO] 2019-12-19 15:16:01.680 springfox.documentation.spring.web.scanners.ApiListingReferenceScanner:[41] - Scanning for api listing references
+[INFO] 2019-12-19 15:16:02.845 springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator:[40] - Generating unique operation named: viewTreeUsingGET_1
+[INFO] 2019-12-19 15:16:02.921 springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator:[40] - Generating unique operation named: queryResourceListUsingGET_1
+[INFO] 2019-12-19 15:16:03.147 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:16:03.147 org.springframework.web.servlet.DispatcherServlet:[524] - Initializing Servlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:16:03.162 org.springframework.web.servlet.DispatcherServlet:[546] - Completed initialization in 14 ms
+[INFO] 2019-12-19 15:16:03.448 org.eclipse.jetty.server.AbstractConnector:[292] - Started ServerConnector@5db9f51f{HTTP/1.1,[http/1.1]}{0.0.0.0:12345}
+[INFO] 2019-12-19 15:16:03.451 org.springframework.boot.web.embedded.jetty.JettyWebServer:[159] - Jetty started on port(s) 12345 (http/1.1) with context path '/dolphinscheduler'
+[INFO] 2019-12-19 15:16:03.467 org.apache.dolphinscheduler.api.ApiApplicationServer:[59] - Started ApiApplicationServer in 13.346 seconds (JVM running for 14.076)
+[INFO] 2019-12-19 15:16:18.688 ru.yandex.clickhouse.ClickHouseDriver:[42] - Driver registered
+[INFO] 2019-12-19 15:16:18.954 com.alibaba.druid.pool.DruidDataSource:[991] - {dataSource-1} inited
+[INFO] 2019-12-19 15:16:19.056 org.apache.dolphinscheduler.api.controller.UsersController:[327] - login user admin,get user info : {}
+[INFO] 2019-12-19 15:16:19.273 org.apache.dolphinscheduler.api.controller.MonitorController:[79] - login user: admin, query all workers
+[INFO] 2019-12-19 15:16:19.278 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:16:19.287 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:16:19.289 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:16:19.306 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:16:19.307 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:16:20.682 org.apache.dolphinscheduler.api.controller.MonitorController:[58] - login user: admin, query all master
+[INFO] 2019-12-19 15:16:20.683 org.apache.dolphinscheduler.api.controller.MonitorController:[60] - list master, user:admin
+[INFO] 2019-12-19 15:16:20.684 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:16:20.696 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:16:20.697 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:16:20.916 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:16:20.917 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:16:23.364 org.apache.dolphinscheduler.api.controller.MonitorController:[79] - login user: admin, query all workers
+[INFO] 2019-12-19 15:16:23.365 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:16:23.373 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:16:23.374 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:16:23.377 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:16:23.378 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:16:24.102 org.apache.dolphinscheduler.api.controller.MonitorController:[120] - login user: admin, query zookeeper state
+[INFO] 2019-12-19 15:16:24.107 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:16:24.971 org.apache.dolphinscheduler.api.controller.MonitorController:[99] - login user: admin, query database state
+[INFO] 2019-12-19 15:16:24.996 com.alibaba.druid.pool.DruidDataSource:[991] - {dataSource-2} inited
+[INFO] 2019-12-19 15:16:25.006 com.alibaba.druid.pool.DruidDataSource:[1928] - {dataSource-2} closed
+[INFO] 2019-12-19 15:16:26.013 org.apache.dolphinscheduler.api.controller.MonitorController:[120] - login user: admin, query zookeeper state
+[INFO] 2019-12-19 15:16:26.014 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:16:26.750 org.apache.dolphinscheduler.api.controller.MonitorController:[79] - login user: admin, query all workers
+[INFO] 2019-12-19 15:16:26.751 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:16:26.761 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:16:26.762 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:16:26.768 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:16:26.769 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:16:27.598 org.apache.dolphinscheduler.api.controller.MonitorController:[58] - login user: admin, query all master
+[INFO] 2019-12-19 15:16:27.598 org.apache.dolphinscheduler.api.controller.MonitorController:[60] - list master, user:admin
+[INFO] 2019-12-19 15:16:27.599 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:16:27.612 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:16:27.612 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:16:27.617 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:16:27.618 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:16:28.066 org.apache.dolphinscheduler.api.controller.MonitorController:[79] - login user: admin, query all workers
+[INFO] 2019-12-19 15:16:28.067 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:16:28.075 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:16:28.075 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:16:28.080 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:16:28.081 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:19:03.819 org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor:[208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[INFO] 2019-12-19 15:19:03.840 com.alibaba.druid.pool.DruidDataSource:[1928] - {dataSource-1} closed
+[INFO] 2019-12-19 15:19:03.882 org.eclipse.jetty.server.AbstractConnector:[341] - Stopped ServerConnector@5db9f51f{HTTP/1.1,[http/1.1]}{0.0.0.0:12345}
+[INFO] 2019-12-19 15:19:03.885 org.eclipse.jetty.server.session:[167] - node0 Stopped scavenging
+[INFO] 2019-12-19 15:19:03.890 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Destroying Spring FrameworkServlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:19:03.892 org.eclipse.jetty.server.handler.ContextHandler:[1045] - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@79aee22a{application,/dolphinscheduler,[file:///tmp/jetty-docbase.4578194760253346579.12345/, jar:file:/opt/dolphinscheduler/lib/springfox-swagger-ui-2.9.2.jar!/META-INF/resources, jar:file:/opt/dolphinscheduler/lib/swagger-bootstrap-ui-1.9.3.jar!/META-INF/resources],UNAVAILABLE}
+[INFO] 2019-12-19 15:19:31.390 org.apache.dolphinscheduler.api.ApiApplicationServer:[50] - Starting ApiApplicationServer v1.2.0 on d45dc75f0a5a with PID 1 (/opt/dolphinscheduler/lib/dolphinscheduler-api-1.2.0.jar started by root in /opt/dolphinscheduler)
+[INFO] 2019-12-19 15:19:31.394 org.apache.dolphinscheduler.api.ApiApplicationServer:[679] - The following profiles are active: api
+[INFO] 2019-12-19 15:19:36.240 org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:[330] - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$57c78ad] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO] 2019-12-19 15:19:37.186 org.eclipse.jetty.util.log:[193] - Logging initialized @7751ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO] 2019-12-19 15:19:37.560 org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory:[143] - Server initialized with port: 12345
+[INFO] 2019-12-19 15:19:37.565 org.eclipse.jetty.server.Server:[370] - jetty-9.4.14.v20181114; built: 2018-11-14T21:20:31.478Z; git: c4550056e785fb5665914545889f21dc136ad9e6; jvm 1.8.0_212-b04
+[INFO] 2019-12-19 15:19:37.685 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Initializing Spring embedded WebApplicationContext
+[INFO] 2019-12-19 15:19:37.686 org.springframework.web.context.ContextLoader:[296] - Root WebApplicationContext: initialization completed in 6190 ms
+[INFO] 2019-12-19 15:19:37.848 org.eclipse.jetty.server.session:[365] - DefaultSessionIdManager workerName=node0
+[INFO] 2019-12-19 15:19:37.848 org.eclipse.jetty.server.session:[370] - No SessionScavenger set, using defaults
+[INFO] 2019-12-19 15:19:37.851 org.eclipse.jetty.server.session:[149] - node0 Scavenging every 660000ms
+[INFO] 2019-12-19 15:19:37.868 org.eclipse.jetty.server.handler.ContextHandler:[855] - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@6d2a2560{application,/dolphinscheduler,[file:///tmp/jetty-docbase.5204251138499574207.12345/, jar:file:/opt/dolphinscheduler/lib/springfox-swagger-ui-2.9.2.jar!/META-INF/resources, jar:file:/opt/dolphinscheduler/lib/swagger-bootstrap-ui-1.9.3.jar!/META-INF/resources],AVAILABLE}
+[INFO] 2019-12-19 15:19:37.873 org.eclipse.jetty.server.Server:[407] - Started @8440ms
+[INFO] 2019-12-19 15:19:41.663 org.apache.dolphinscheduler.common.queue.TaskQueueFactory:[45] - task queue impl use zookeeper 
+[INFO] 2019-12-19 15:19:41.810 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:19:42.141 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:19:42.154 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:19:43.950 springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping:[69] - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+[INFO] 2019-12-19 15:19:44.276 org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor:[171] - Initializing ExecutorService 'applicationTaskExecutor'
+[INFO] 2019-12-19 15:19:44.977 springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper:[160] - Context refreshed
+[INFO] 2019-12-19 15:19:45.019 springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper:[163] - Found 1 custom documentation plugin(s)
+[INFO] 2019-12-19 15:19:45.156 springfox.documentation.spring.web.scanners.ApiListingReferenceScanner:[41] - Scanning for api listing references
+[INFO] 2019-12-19 15:19:45.697 springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator:[40] - Generating unique operation named: viewTreeUsingGET_1
+[INFO] 2019-12-19 15:19:45.770 springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator:[40] - Generating unique operation named: queryResourceListUsingGET_1
+[INFO] 2019-12-19 15:19:45.934 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:19:45.935 org.springframework.web.servlet.DispatcherServlet:[524] - Initializing Servlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:19:45.948 org.springframework.web.servlet.DispatcherServlet:[546] - Completed initialization in 12 ms
+[INFO] 2019-12-19 15:19:46.053 org.eclipse.jetty.server.AbstractConnector:[292] - Started ServerConnector@70d5d96b{HTTP/1.1,[http/1.1]}{0.0.0.0:12345}
+[INFO] 2019-12-19 15:19:46.056 org.springframework.boot.web.embedded.jetty.JettyWebServer:[159] - Jetty started on port(s) 12345 (http/1.1) with context path '/dolphinscheduler'
+[INFO] 2019-12-19 15:19:46.061 org.apache.dolphinscheduler.api.ApiApplicationServer:[59] - Started ApiApplicationServer in 15.908 seconds (JVM running for 16.628)
+[INFO] 2019-12-19 15:19:48.439 org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor:[208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[INFO] 2019-12-19 15:19:48.465 org.eclipse.jetty.server.AbstractConnector:[341] - Stopped ServerConnector@70d5d96b{HTTP/1.1,[http/1.1]}{0.0.0.0:12345}
+[INFO] 2019-12-19 15:19:48.466 org.eclipse.jetty.server.session:[167] - node0 Stopped scavenging
+[INFO] 2019-12-19 15:19:48.468 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Destroying Spring FrameworkServlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:19:48.470 org.eclipse.jetty.server.handler.ContextHandler:[1045] - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@6d2a2560{application,/dolphinscheduler,[file:///tmp/jetty-docbase.5204251138499574207.12345/, jar:file:/opt/dolphinscheduler/lib/springfox-swagger-ui-2.9.2.jar!/META-INF/resources, jar:file:/opt/dolphinscheduler/lib/swagger-bootstrap-ui-1.9.3.jar!/META-INF/resources],UNAVAILABLE}
+[INFO] 2019-12-19 15:26:15.389 org.apache.dolphinscheduler.api.ApiApplicationServer:[50] - Starting ApiApplicationServer v1.2.0 on eb1e7b601777 with PID 1 (/opt/dolphinscheduler/lib/dolphinscheduler-api-1.2.0.jar started by root in /opt/dolphinscheduler)
+[INFO] 2019-12-19 15:26:15.394 org.apache.dolphinscheduler.api.ApiApplicationServer:[679] - The following profiles are active: api
+[INFO] 2019-12-19 15:26:20.352 org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:[330] - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$35d11809] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO] 2019-12-19 15:26:20.980 org.eclipse.jetty.util.log:[193] - Logging initialized @7713ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO] 2019-12-19 15:26:21.331 org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory:[143] - Server initialized with port: 12345
+[INFO] 2019-12-19 15:26:21.337 org.eclipse.jetty.server.Server:[370] - jetty-9.4.14.v20181114; built: 2018-11-14T21:20:31.478Z; git: c4550056e785fb5665914545889f21dc136ad9e6; jvm 1.8.0_212-b04
+[INFO] 2019-12-19 15:26:21.490 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Initializing Spring embedded WebApplicationContext
+[INFO] 2019-12-19 15:26:21.490 org.springframework.web.context.ContextLoader:[296] - Root WebApplicationContext: initialization completed in 5997 ms
+[INFO] 2019-12-19 15:26:21.593 org.eclipse.jetty.server.session:[365] - DefaultSessionIdManager workerName=node0
+[INFO] 2019-12-19 15:26:21.595 org.eclipse.jetty.server.session:[370] - No SessionScavenger set, using defaults
+[INFO] 2019-12-19 15:26:21.598 org.eclipse.jetty.server.session:[149] - node0 Scavenging every 600000ms
+[INFO] 2019-12-19 15:26:21.642 org.eclipse.jetty.server.handler.ContextHandler:[855] - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@1cfc2538{application,/dolphinscheduler,[file:///tmp/jetty-docbase.3108496703517295259.12345/, jar:file:/opt/dolphinscheduler/lib/springfox-swagger-ui-2.9.2.jar!/META-INF/resources, jar:file:/opt/dolphinscheduler/lib/swagger-bootstrap-ui-1.9.3.jar!/META-INF/resources],AVAILABLE}
+[INFO] 2019-12-19 15:26:21.645 org.eclipse.jetty.server.Server:[407] - Started @8380ms
+[INFO] 2019-12-19 15:26:26.534 org.apache.dolphinscheduler.common.queue.TaskQueueFactory:[45] - task queue impl use zookeeper 
+[INFO] 2019-12-19 15:26:26.723 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:26:26.892 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:26:26.895 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:26:29.126 springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping:[69] - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+[INFO] 2019-12-19 15:26:29.690 org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor:[171] - Initializing ExecutorService 'applicationTaskExecutor'
+[INFO] 2019-12-19 15:26:30.956 springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper:[160] - Context refreshed
+[INFO] 2019-12-19 15:26:31.030 springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper:[163] - Found 1 custom documentation plugin(s)
+[INFO] 2019-12-19 15:26:31.393 springfox.documentation.spring.web.scanners.ApiListingReferenceScanner:[41] - Scanning for api listing references
+[INFO] 2019-12-19 15:26:32.595 springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator:[40] - Generating unique operation named: viewTreeUsingGET_1
+[INFO] 2019-12-19 15:26:32.784 springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator:[40] - Generating unique operation named: queryResourceListUsingGET_1
+[INFO] 2019-12-19 15:26:33.219 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:26:33.220 org.springframework.web.servlet.DispatcherServlet:[524] - Initializing Servlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:26:33.240 org.springframework.web.servlet.DispatcherServlet:[546] - Completed initialization in 20 ms
+[INFO] 2019-12-19 15:26:33.487 org.eclipse.jetty.server.AbstractConnector:[292] - Started ServerConnector@2a667f44{HTTP/1.1,[http/1.1]}{0.0.0.0:12345}
+[INFO] 2019-12-19 15:26:33.490 org.springframework.boot.web.embedded.jetty.JettyWebServer:[159] - Jetty started on port(s) 12345 (http/1.1) with context path '/dolphinscheduler'
+[INFO] 2019-12-19 15:26:33.503 org.apache.dolphinscheduler.api.ApiApplicationServer:[59] - Started ApiApplicationServer in 19.515 seconds (JVM running for 20.238)
+[INFO] 2019-12-19 15:26:35.045 ru.yandex.clickhouse.ClickHouseDriver:[42] - Driver registered
+[INFO] 2019-12-19 15:26:35.652 com.alibaba.druid.pool.DruidDataSource:[991] - {dataSource-1} inited
+[INFO] 2019-12-19 15:26:35.783 org.apache.dolphinscheduler.api.controller.UsersController:[327] - login user admin,get user info : {}
+[INFO] 2019-12-19 15:26:36.222 org.apache.dolphinscheduler.api.controller.DataAnalysisController:[132] - count process definition , user:admin, project id
+[INFO] 2019-12-19 15:26:36.222 org.apache.dolphinscheduler.api.controller.DataAnalysisController:[106] - count process instance state, user:admin, start date: 2019-12-19 00:00:00, end date:2019-12-19 15:26:35, project id
+[INFO] 2019-12-19 15:26:36.226 org.apache.dolphinscheduler.api.controller.DataAnalysisController:[74] - count task state, user:admin, start date: 2019-12-19 00:00:00, end date:2019-12-19 15:26:35, project id 0
+[INFO] 2019-12-19 15:26:38.206 org.apache.dolphinscheduler.api.controller.MonitorController:[58] - login user: admin, query all master
+[INFO] 2019-12-19 15:26:38.207 org.apache.dolphinscheduler.api.controller.MonitorController:[60] - list master, user:admin
+[INFO] 2019-12-19 15:26:38.209 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:26:38.221 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:26:38.221 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:26:38.401 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:26:38.402 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:26:39.624 org.apache.dolphinscheduler.api.controller.MonitorController:[79] - login user: admin, query all workers
+[INFO] 2019-12-19 15:26:39.626 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:26:39.635 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:26:39.635 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:26:39.642 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:26:39.643 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:26:41.567 org.apache.dolphinscheduler.api.controller.MonitorController:[120] - login user: admin, query zookeeper state
+[INFO] 2019-12-19 15:26:41.571 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:26:42.234 org.apache.dolphinscheduler.api.controller.MonitorController:[58] - login user: admin, query all master
+[INFO] 2019-12-19 15:26:42.235 org.apache.dolphinscheduler.api.controller.MonitorController:[60] - list master, user:admin
+[INFO] 2019-12-19 15:26:42.236 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:26:42.244 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:26:42.246 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:26:42.249 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:26:42.250 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:26:43.547 org.apache.dolphinscheduler.api.controller.MonitorController:[79] - login user: admin, query all workers
+[INFO] 2019-12-19 15:26:43.548 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:26:43.555 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:26:43.556 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:26:43.562 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:26:43.563 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:26:44.421 org.apache.dolphinscheduler.api.controller.MonitorController:[120] - login user: admin, query zookeeper state
+[INFO] 2019-12-19 15:26:44.422 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:26:45.106 org.apache.dolphinscheduler.api.controller.MonitorController:[99] - login user: admin, query database state
+[INFO] 2019-12-19 15:26:45.136 com.alibaba.druid.pool.DruidDataSource:[991] - {dataSource-2} inited
+[INFO] 2019-12-19 15:26:45.149 com.alibaba.druid.pool.DruidDataSource:[1928] - {dataSource-2} closed
+[INFO] 2019-12-19 15:26:45.679 org.apache.dolphinscheduler.api.controller.MonitorController:[120] - login user: admin, query zookeeper state
+[INFO] 2019-12-19 15:26:45.680 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:26:46.323 org.apache.dolphinscheduler.api.controller.MonitorController:[79] - login user: admin, query all workers
+[INFO] 2019-12-19 15:26:46.325 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:26:46.333 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:26:46.334 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:26:46.339 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:26:46.340 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:26:47.186 org.apache.dolphinscheduler.api.controller.MonitorController:[58] - login user: admin, query all master
+[INFO] 2019-12-19 15:26:47.186 org.apache.dolphinscheduler.api.controller.MonitorController:[60] - list master, user:admin
+[INFO] 2019-12-19 15:26:47.187 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:26:47.195 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:26:47.195 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:26:47.231 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:26:47.232 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:26:48.969 org.apache.dolphinscheduler.api.controller.MonitorController:[79] - login user: admin, query all workers
+[INFO] 2019-12-19 15:26:48.970 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:26:48.978 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:26:48.978 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:26:48.983 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:26:48.984 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:26:50.164 org.apache.dolphinscheduler.api.controller.MonitorController:[58] - login user: admin, query all master
+[INFO] 2019-12-19 15:26:50.165 org.apache.dolphinscheduler.api.controller.MonitorController:[60] - list master, user:admin
+[INFO] 2019-12-19 15:26:50.166 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:26:50.174 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:26:50.174 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:26:50.179 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:26:50.181 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:26:50.886 org.apache.dolphinscheduler.api.controller.MonitorController:[79] - login user: admin, query all workers
+[INFO] 2019-12-19 15:26:50.887 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:26:50.942 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:26:50.943 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:26:50.949 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:26:50.950 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:27:16.988 org.apache.dolphinscheduler.api.controller.MonitorController:[120] - login user: admin, query zookeeper state
+[INFO] 2019-12-19 15:27:16.989 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:27:19.784 org.apache.dolphinscheduler.api.controller.UsersController:[327] - login user admin,get user info : {}
+[INFO] 2019-12-19 15:27:19.926 org.apache.dolphinscheduler.api.controller.MonitorController:[120] - login user: admin, query zookeeper state
+[INFO] 2019-12-19 15:27:19.927 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:28:19.936 org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor:[208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[INFO] 2019-12-19 15:28:19.955 com.alibaba.druid.pool.DruidDataSource:[1928] - {dataSource-1} closed
+[INFO] 2019-12-19 15:28:19.963 org.eclipse.jetty.server.AbstractConnector:[341] - Stopped ServerConnector@2a667f44{HTTP/1.1,[http/1.1]}{0.0.0.0:12345}
+[INFO] 2019-12-19 15:28:19.964 org.eclipse.jetty.server.session:[167] - node0 Stopped scavenging
+[INFO] 2019-12-19 15:28:19.966 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Destroying Spring FrameworkServlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:28:19.968 org.eclipse.jetty.server.handler.ContextHandler:[1045] - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@1cfc2538{application,/dolphinscheduler,[file:///tmp/jetty-docbase.3108496703517295259.12345/, jar:file:/opt/dolphinscheduler/lib/springfox-swagger-ui-2.9.2.jar!/META-INF/resources, jar:file:/opt/dolphinscheduler/lib/swagger-bootstrap-ui-1.9.3.jar!/META-INF/resources],UNAVAILABLE}
+[INFO] 2019-12-19 15:37:12.255 org.apache.dolphinscheduler.api.ApiApplicationServer:[50] - Starting ApiApplicationServer v1.2.0 on c2ec9d33f75b with PID 1 (/opt/dolphinscheduler/lib/dolphinscheduler-api-1.2.0.jar started by root in /opt/dolphinscheduler)
+[INFO] 2019-12-19 15:37:12.259 org.apache.dolphinscheduler.api.ApiApplicationServer:[679] - The following profiles are active: api
+[INFO] 2019-12-19 15:37:16.840 org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:[330] - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$bad2a1b5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO] 2019-12-19 15:37:17.426 org.eclipse.jetty.util.log:[193] - Logging initialized @6964ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO] 2019-12-19 15:37:17.789 org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory:[143] - Server initialized with port: 12345
+[INFO] 2019-12-19 15:37:17.805 org.eclipse.jetty.server.Server:[370] - jetty-9.4.14.v20181114; built: 2018-11-14T21:20:31.478Z; git: c4550056e785fb5665914545889f21dc136ad9e6; jvm 1.8.0_212-b04
+[INFO] 2019-12-19 15:37:17.971 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Initializing Spring embedded WebApplicationContext
+[INFO] 2019-12-19 15:37:17.972 org.springframework.web.context.ContextLoader:[296] - Root WebApplicationContext: initialization completed in 5613 ms
+[INFO] 2019-12-19 15:37:18.167 org.eclipse.jetty.server.session:[365] - DefaultSessionIdManager workerName=node0
+[INFO] 2019-12-19 15:37:18.168 org.eclipse.jetty.server.session:[370] - No SessionScavenger set, using defaults
+[INFO] 2019-12-19 15:37:18.171 org.eclipse.jetty.server.session:[149] - node0 Scavenging every 600000ms
+[INFO] 2019-12-19 15:37:18.191 org.eclipse.jetty.server.handler.ContextHandler:[855] - Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@58606c91{application,/dolphinscheduler,[file:///tmp/jetty-docbase.8355794130737745661.12345/, jar:file:/opt/dolphinscheduler/lib/springfox-swagger-ui-2.9.2.jar!/META-INF/resources, jar:file:/opt/dolphinscheduler/lib/swagger-bootstrap-ui-1.9.3.jar!/META-INF/resources],AVAILABLE}
+[INFO] 2019-12-19 15:37:18.197 org.eclipse.jetty.server.Server:[407] - Started @7738ms
+[INFO] 2019-12-19 15:37:21.884 org.apache.dolphinscheduler.common.queue.TaskQueueFactory:[45] - task queue impl use zookeeper 
+[INFO] 2019-12-19 15:37:22.041 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:37:22.213 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:37:22.227 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:37:24.015 springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping:[69] - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+[INFO] 2019-12-19 15:37:24.433 org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor:[171] - Initializing ExecutorService 'applicationTaskExecutor'
+[INFO] 2019-12-19 15:37:25.832 springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper:[160] - Context refreshed
+[INFO] 2019-12-19 15:37:25.914 springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper:[163] - Found 1 custom documentation plugin(s)
+[INFO] 2019-12-19 15:37:26.200 springfox.documentation.spring.web.scanners.ApiListingReferenceScanner:[41] - Scanning for api listing references
+[INFO] 2019-12-19 15:37:27.222 springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator:[40] - Generating unique operation named: viewTreeUsingGET_1
+[INFO] 2019-12-19 15:37:27.417 springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator:[40] - Generating unique operation named: queryResourceListUsingGET_1
+[INFO] 2019-12-19 15:37:28.129 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:37:28.130 org.springframework.web.servlet.DispatcherServlet:[524] - Initializing Servlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:37:28.159 org.springframework.web.servlet.DispatcherServlet:[546] - Completed initialization in 29 ms
+[INFO] 2019-12-19 15:37:28.378 org.eclipse.jetty.server.AbstractConnector:[292] - Started ServerConnector@2830315f{HTTP/1.1,[http/1.1]}{0.0.0.0:12345}
+[INFO] 2019-12-19 15:37:28.400 org.springframework.boot.web.embedded.jetty.JettyWebServer:[159] - Jetty started on port(s) 12345 (http/1.1) with context path '/dolphinscheduler'
+[INFO] 2019-12-19 15:37:28.406 org.apache.dolphinscheduler.api.ApiApplicationServer:[59] - Started ApiApplicationServer in 17.227 seconds (JVM running for 17.946)
+[INFO] 2019-12-19 15:37:30.520 ru.yandex.clickhouse.ClickHouseDriver:[42] - Driver registered
+[INFO] 2019-12-19 15:37:30.911 com.alibaba.druid.pool.DruidDataSource:[991] - {dataSource-1} inited
+[INFO] 2019-12-19 15:37:31.040 org.apache.dolphinscheduler.api.controller.UsersController:[327] - login user admin,get user info : {}
+[INFO] 2019-12-19 15:37:31.546 org.apache.dolphinscheduler.api.controller.DataAnalysisController:[106] - count process instance state, user:admin, start date: 2019-12-19 00:00:00, end date:2019-12-19 15:37:30, project id
+[INFO] 2019-12-19 15:37:31.546 org.apache.dolphinscheduler.api.controller.DataAnalysisController:[74] - count task state, user:admin, start date: 2019-12-19 00:00:00, end date:2019-12-19 15:37:30, project id 0
+[INFO] 2019-12-19 15:37:31.551 org.apache.dolphinscheduler.api.controller.DataAnalysisController:[132] - count process definition , user:admin, project id
+[INFO] 2019-12-19 15:37:33.578 org.apache.dolphinscheduler.api.controller.TenantController:[113] - login user admin, list paging, pageNo: 1, searchVal: , pageSize: 10
+[INFO] 2019-12-19 15:37:34.986 org.apache.dolphinscheduler.api.controller.UsersController:[116] - login user admin, list user paging, pageNo: 1, searchVal: , pageSize: 10
+[INFO] 2019-12-19 15:37:36.107 org.apache.dolphinscheduler.api.controller.MonitorController:[58] - login user: admin, query all master
+[INFO] 2019-12-19 15:37:36.108 org.apache.dolphinscheduler.api.controller.MonitorController:[60] - list master, user:admin
+[INFO] 2019-12-19 15:37:36.111 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:37:36.121 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:37:36.122 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:37:36.302 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:37:36.304 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:37:37.901 org.apache.dolphinscheduler.api.controller.MonitorController:[79] - login user: admin, query all workers
+[INFO] 2019-12-19 15:37:37.902 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:37:37.914 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:37:37.914 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:37:37.922 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:37:37.923 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:37:38.730 org.apache.dolphinscheduler.api.controller.MonitorController:[120] - login user: admin, query zookeeper state
+[INFO] 2019-12-19 15:37:38.734 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:37:38.738 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:37:38.748 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:37:38.753 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:37:50.463 org.apache.dolphinscheduler.api.controller.UsersController:[327] - login user admin,get user info : {}
+[INFO] 2019-12-19 15:37:50.574 org.apache.dolphinscheduler.api.controller.MonitorController:[120] - login user: admin, query zookeeper state
+[INFO] 2019-12-19 15:37:50.575 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:37:50.580 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:37:50.585 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:37:50.588 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:37:56.315 org.apache.dolphinscheduler.api.controller.MonitorController:[58] - login user: admin, query all master
+[INFO] 2019-12-19 15:37:56.316 org.apache.dolphinscheduler.api.controller.MonitorController:[60] - list master, user:admin
+[INFO] 2019-12-19 15:37:56.317 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:37:56.326 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:37:56.326 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:37:56.336 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:37:56.336 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:37:57.381 org.apache.dolphinscheduler.api.controller.MonitorController:[79] - login user: admin, query all workers
+[INFO] 2019-12-19 15:37:57.382 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:37:57.390 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:37:57.391 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:37:57.398 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:37:57.400 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:37:58.164 org.apache.dolphinscheduler.api.controller.MonitorController:[120] - login user: admin, query zookeeper state
+[INFO] 2019-12-19 15:37:58.165 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:37:58.170 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:37:58.174 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:37:58.178 org.apache.dolphinscheduler.api.utils.FourLetterWordMain:[64] - connecting to 192.168.5.222 2181
+[INFO] 2019-12-19 15:37:58.864 org.apache.dolphinscheduler.api.controller.MonitorController:[99] - login user: admin, query database state
+[INFO] 2019-12-19 15:37:58.891 com.alibaba.druid.pool.DruidDataSource:[991] - {dataSource-2} inited
+[INFO] 2019-12-19 15:37:58.902 com.alibaba.druid.pool.DruidDataSource:[1928] - {dataSource-2} closed
+[INFO] 2019-12-19 15:38:00.369 org.apache.dolphinscheduler.api.controller.DataAnalysisController:[165] - count command state, user:admin, start date: null, end date:null, project id 0
+[INFO] 2019-12-19 15:38:00.369 org.apache.dolphinscheduler.api.controller.DataAnalysisController:[191] - count command state, user:admin, start date: 0, end date:{}, project id {}
+[INFO] 2019-12-19 15:38:00.370 org.apache.dolphinscheduler.common.queue.TaskQueueFactory:[45] - task queue impl use zookeeper 
+[INFO] 2019-12-19 15:38:01.734 org.apache.dolphinscheduler.api.controller.MonitorController:[58] - login user: admin, query all master
+[INFO] 2019-12-19 15:38:01.735 org.apache.dolphinscheduler.api.controller.MonitorController:[60] - list master, user:admin
+[INFO] 2019-12-19 15:38:01.735 org.apache.curator.framework.imps.CuratorFrameworkImpl:[235] - Starting
+[INFO] 2019-12-19 15:38:01.780 org.apache.curator.framework.state.ConnectionStateManager:[228] - State change: CONNECTED
+[INFO] 2019-12-19 15:38:01.781 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[115] - state changed , current state : CONNECTED
+[INFO] 2019-12-19 15:38:01.788 org.apache.curator.framework.imps.CuratorFrameworkImpl:[821] - backgroundOperationsLoop exiting
+[INFO] 2019-12-19 15:38:01.789 org.apache.dolphinscheduler.common.zk.AbstractZKClient:[138] - zookeeper close ...
+[INFO] 2019-12-19 15:38:02.908 org.apache.dolphinscheduler.api.controller.DataAnalysisController:[74] - count task state, user:admin, start date: 2019-12-19 00:00:00, end date:2019-12-19 15:38:01, project id 0
+[INFO] 2019-12-19 15:38:02.908 org.apache.dolphinscheduler.api.controller.DataAnalysisController:[132] - count process definition , user:admin, project id
+[INFO] 2019-12-19 15:38:02.908 org.apache.dolphinscheduler.api.controller.DataAnalysisController:[106] - count process instance state, user:admin, start date: 2019-12-19 00:00:00, end date:2019-12-19 15:38:01, project id
+[INFO] 2019-12-19 15:38:04.337 org.apache.dolphinscheduler.api.controller.ProjectController:[169] - login user admin, query project list paging
+[INFO] 2019-12-19 15:38:20.804 org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor:[208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[INFO] 2019-12-19 15:38:20.818 com.alibaba.druid.pool.DruidDataSource:[1928] - {dataSource-1} closed
+[INFO] 2019-12-19 15:38:20.826 org.eclipse.jetty.server.AbstractConnector:[341] - Stopped ServerConnector@2830315f{HTTP/1.1,[http/1.1]}{0.0.0.0:12345}
+[INFO] 2019-12-19 15:38:20.827 org.eclipse.jetty.server.session:[167] - node0 Stopped scavenging
+[INFO] 2019-12-19 15:38:20.830 org.eclipse.jetty.server.handler.ContextHandler.application:[2345] - Destroying Spring FrameworkServlet 'dispatcherServlet'
+[INFO] 2019-12-19 15:38:20.831 org.eclipse.jetty.server.handler.ContextHandler:[1045] - Stopped o.s.b.w.e.j.JettyEmbeddedWebAppContext@58606c91{application,/dolphinscheduler,[file:///tmp/jetty-docbase.8355794130737745661.12345/, jar:file:/opt/dolphinscheduler/lib/springfox-swagger-ui-2.9.2.jar!/META-INF/resources, jar:file:/opt/dolphinscheduler/lib/swagger-bootstrap-ui-1.9.3.jar!/META-INF/resources],UNAVAILABLE}

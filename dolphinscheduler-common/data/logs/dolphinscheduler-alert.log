@@ -1,0 +1,315 @@
+[INFO] 2019-12-19 15:16:21.713 org.apache.dolphinscheduler.alert.AlertServer:[60] - alert server ready start 
+[INFO] 2019-12-19 15:16:26.793 ru.yandex.clickhouse.ClickHouseDriver:[42] - Driver registered
+[INFO] 2019-12-19 15:16:27.136 com.alibaba.druid.pool.DruidDataSource:[991] - {dataSource-1} inited
+[ERROR] 2019-12-19 15:16:27.435 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:16:27.512 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:16:27.519 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:16:27.529 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:16:27.541 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:16:27.550 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:16:27.558 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:16:27.566 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:16:27.572 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:16:27.584 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:16:27.591 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:16:27.601 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[INFO] 2019-12-19 15:26:45.325 org.apache.dolphinscheduler.alert.AlertServer:[60] - alert server ready start 
+[INFO] 2019-12-19 15:26:50.404 ru.yandex.clickhouse.ClickHouseDriver:[42] - Driver registered
+[INFO] 2019-12-19 15:26:51.160 com.alibaba.druid.pool.DruidDataSource:[991] - {dataSource-1} inited
+[ERROR] 2019-12-19 15:26:51.453 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:26:51.545 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:26:51.553 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:26:51.564 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:26:51.569 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:26:51.578 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:26:51.583 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:26:51.595 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:26:51.601 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:26:51.614 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:26:51.622 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:26:51.632 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[INFO] 2019-12-19 15:37:42.455 org.apache.dolphinscheduler.alert.AlertServer:[60] - alert server ready start 
+[INFO] 2019-12-19 15:37:47.534 ru.yandex.clickhouse.ClickHouseDriver:[42] - Driver registered
+[INFO] 2019-12-19 15:37:47.895 com.alibaba.druid.pool.DruidDataSource:[991] - {dataSource-1} inited
+[ERROR] 2019-12-19 15:37:48.198 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:37:48.275 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:37:48.282 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:37:48.293 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:37:48.299 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:37:48.309 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:37:48.316 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:37:48.325 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:37:48.330 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:37:48.340 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+[ERROR] 2019-12-19 15:37:48.346 org.apache.dolphinscheduler.alert.utils.MailUtils:[425] - Send email to ,[albert_yao@patazon.net] failed
+org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1974)
+	at org.apache.commons.mail.Email.setFrom(Email.java:757)
+	at org.apache.commons.mail.Email.setFrom(Email.java:740)
+	at org.apache.commons.mail.Email.setFrom(Email.java:720)
+	at org.apache.dolphinscheduler.alert.utils.MailUtils.sendMails(MailUtils.java:132)
+	at org.apache.dolphinscheduler.alert.manager.EmailManager.send(EmailManager.java:40)
+	at org.apache.dolphinscheduler.alert.runner.AlertSender.run(AlertSender.java:101)
+	at org.apache.dolphinscheduler.alert.AlertServer.start(AlertServer.java:69)
+	at org.apache.dolphinscheduler.alert.AlertServer.main(AlertServer.java:76)
+Caused by: javax.mail.internet.AddressException: Missing final '@domain'
+	at javax.mail.internet.InternetAddress.checkAddress(InternetAddress.java:1388)
+	at javax.mail.internet.InternetAddress.validate(InternetAddress.java:1253)
+	at org.apache.commons.mail.Email.createInternetAddress(Email.java:1970)
+	... 8 common frames omitted
+[INFO] 2019-12-19 15:37:48.354 org.apache.dolphinscheduler.alert.runner.AlertSender:[125] - alert send error : Send email to {,[albert_yao@patazon.net]} failed，org.apache.commons.mail.EmailException: javax.mail.internet.AddressException: Missing final '@domain' in string ``xxxxxxxxxx''
