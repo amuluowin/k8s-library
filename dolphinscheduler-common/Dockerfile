@@ -7,7 +7,7 @@ COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 RUN apk update && apk add --no-cache --virtual .build-deps tzdata wget tar gzip dos2unix \
-    && apk add --no-cache python-dev py-pip && pip install --upgrade pip && pip install kazoo && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && apk add --no-cache python-dev py-pip pyhton3-dev sudo && pip install --upgrade pip && pip install kazoo && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone
     
 RUN wget https://dist.apache.org/repos/dist/dev/incubator/dolphinscheduler/1.2.0/apache-dolphinscheduler-incubating-1.2.0-dolphinscheduler-backend-bin.tar.gz
