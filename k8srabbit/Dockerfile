@@ -1,4 +1,4 @@
-FROM php:7.3-cli-alpine
+FROM php:7.4-cli-alpine
 
 MAINTAINER albert <63851587@qq.com>
 
@@ -24,6 +24,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && apk add --no-cache cyrus-sasl-dev lz4-dev zstd-dev \
     libcurl \
     yaml-dev \
+    libxml2-dev \
     pcre-dev \
     perl-dev \
     openssl-dev \
@@ -32,15 +33,18 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     libpng-dev \
     libzip-dev \
     libmcrypt-dev \
+    cifs-utils \
+    poppler-utils \
+    poppler-data \
     gmp-dev \
 
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
 
-    && docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir \
-    && docker-php-ext-install pdo_mysql bcmath opcache sockets zip gmp gd && pecl install msgpack yaml inotify igbinary \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) soap pdo_mysql bcmath opcache sockets zip gmp gd && pecl install msgpack yaml inotify igbinary seaslog xlswriter \
 
-    && wget https://github.com/swoole/swoole-src/archive/v4.4.13.tar.gz -O swoole.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v4.5.2.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm -f swoole.tar.gz \
@@ -53,33 +57,22 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf swoole \
     
-    && wget https://github.com/mabu233/sdebug/archive/sdebug_2_7-beta.tar.gz -O sdebug.tar.gz \
+    && wget https://github.com/swoole/sdebug/archive/sdebug_2_9-beta.tar.gz -O sdebug.tar.gz \
     && mkdir -p sdebug \
     && tar -xf sdebug.tar.gz -C sdebug --strip-components=1 \
-    && rm sdebug.tar.gz \
+    && rm -f sdebug.tar.gz \
     && (\
         cd sdebug \
         && phpize \
         && ./configure --enable-xdebug \
         && make -j$(nproc) \
         && make install \
-    ) \
+    ) \ 
     && rm -rf sdebug \
-
-    && git clone https://github.com/viest/php-ext-excel-export \
-    && (\
-        cd php-ext-excel-export \
-        && git submodule update --init \
-        && phpize \
-        && ./configure --enable-reader \
-        && make -j \
-        && make install \
-    ) \
-    && rm -rf php-ext-excel-export \
 
     && git clone https://github.com/osgochina/donkeyid.git \
     && (\
-        cd donkeyid/donkeyid \
+        cd donkeyid \
         && phpize \
         && ./configure \
         && make -j \
@@ -112,7 +105,42 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf php-rdkafka \
     
-    && docker-php-ext-enable swoole msgpack yaml inotify donkeyid xlswriter igbinary && pecl clear-cache\
+    && git clone https://github.com/amuluowin/ext-orm.git \
+    && (\
+        cd ext-orm \
+        && phpize \
+        && ./configure \
+        && make -j \
+        && make install \
+    ) \
+    && rm -rf ext-orm \
+    
+    && docker-php-ext-enable swoole msgpack yaml inotify donkeyid xlswriter igbinary swoole_orm  \
+
+    # && wget -P /usr/bin https://github.com/swoole/phpx/releases/download/v0.2.0/phpx \
+    # && chmod +x /usr/bin/phpx \
+    # && wget https://github.com/swoole/phpx/archive/v0.2.0.tar.gz -O phpx.tar.gz \
+    # && mkdir -p phpx \
+    # && tar -xf phpx.tar.gz -C phpx --strip-components=1 \
+    # && rm -f phpx.tar.gz \
+    # && ( \
+    #     cd phpx \
+    #     && cmake . \
+    #     && make -j \
+    #     && make install \
+    # ) \
+    # && rm -rf phpx \
+
+    # && git clone https://github.com/matyhtf/php-kcp.git \
+    # && (\
+    #     cd php-kcp \
+    #     && phpx build -v \
+    #     && phpx install \
+    # ) \
+    # && rm -rf php-kcp \
+
+    # && docker-php-ext-enable kcp && pecl clear-cache \
+    && pecl clear-cache \
 
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
