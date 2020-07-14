@@ -67,10 +67,13 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && ./configure --enable-xdebug \
         && make -j$(nproc) \
         && make install \
-    ) \ 
+    ) \
     && rm -rf sdebug \
 
-    && git clone https://github.com/osgochina/donkeyid.git \
+    && wget https://github.com/osgochina/donkeyid/archive/donkeyid-1.1.tar.gz -O donkeyid.tar.gz \
+    && mkdir -p donkeyid \
+    && tar -xf donkeyid.tar.gz -C donkeyid --strip-components=1 \
+    && rm -f donkeyid.tar.gz \
     && (\
         cd donkeyid \
         && phpize \
@@ -93,8 +96,8 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     
     && git clone https://github.com/amuluowin/php-rdkafka.git \
     && (\
-        chmod -R 777 php-rdkafka \
-        && cd php-rdkafka/lib/librdkafka \
+        cd php-rdkafka && git submodule update --init \
+        && cd lib/librdkafka \
         && ./configure --install-deps \
         && cd ../../ \
         && phpize \
