@@ -85,7 +85,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     
     && git clone https://github.com/amuluowin/SeasClick.git \
     && (\
-        cd SeasClick \
+        cd SeasClick && git submodule update --init \
         && phpize \
         && ./configure --enable-swoole \
         && make -j \
