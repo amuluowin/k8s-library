@@ -1,7 +1,5 @@
 FROM php:7.4-cli-alpine
 
-MAINTAINER albert <63851587@qq.com>
-
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
@@ -54,6 +52,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && ./configure --enable-mysqlnd --enable-openssl --enable-http2 --enable-sockets \
         && make -j \
         && make install \
+        && echo "extension=swoole.so">/usr/local/etc/php/conf.d/00-swoole.ini \
     ) \
     && rm -rf swoole \
     
@@ -90,7 +89,6 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && ./configure --enable-swoole \
         && make -j \
         && make install \
-        && echo "extension=SeasClick.so">/usr/local/etc/php/conf.d/docker-php-ext-zseasclick.ini \
     ) \
     && rm -rf SeasClick \
     
@@ -104,7 +102,6 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && ./configure \
         && make -j \
         && make install \
-        && echo "extension=rdkafka.so">/usr/local/etc/php/conf.d/docker-php-ext-zrdkafka.ini \
     ) \
     && rm -rf php-rdkafka \
     
@@ -118,7 +115,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf ext-orm \
     
-    && docker-php-ext-enable swoole msgpack yaml inotify donkeyid xlswriter igbinary swoole_orm  \
+    && docker-php-ext-enable msgpack yaml inotify donkeyid xlswriter igbinary swoole_orm  \
 
     # && wget -P /usr/bin https://github.com/swoole/phpx/releases/download/v0.2.0/phpx \
     # && chmod +x /usr/bin/phpx \
