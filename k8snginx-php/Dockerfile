@@ -22,7 +22,7 @@ RUN apk update \
     sed -i -e "s/listen\s*=\s*127.0.0.1:9000/listen = 9000/g" /usr/local/etc/php-fpm.d/www.conf && \
     docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir &&\
     docker-php-ext-install -j$(nproc) gd &&\
-    docker-php-ext-install pdo_mysql mysqli bcmath sockets opcache zip && pecl channel-update pecl.php.net && pecl install seaslog ldap redis xdebug &&\
+    docker-php-ext-install pdo_mysql mysqli bcmath sockets opcache zip ldap && pecl channel-update pecl.php.net && pecl install seaslog redis xdebug &&\
     docker-php-ext-enable seaslog mysqli ldap redis && pecl clear-cache &&\
     mkdir -p /run/nginx \
     && apk del .build-deps \
