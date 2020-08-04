@@ -17,7 +17,7 @@ RUN apk update \
     binutils \
     musl \
     linux-headers &&\
-    apk add tzdata runit nginx freetype-dev gd-dev libjpeg-turbo-dev libpng-dev libmcrypt-dev libevent-dev git bash && \
+    apk add tzdata runit nginx freetype-dev gd-dev libjpeg-turbo-dev libpng-dev libmcrypt-dev libevent-dev git bash libzip-dev  && \
     cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
     echo "${TIMEZONE}" > /etc/timezone && \
     sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /usr/local/etc/php-fpm.conf && \
@@ -29,7 +29,7 @@ RUN apk update \
     mkdir -p /run/nginx \
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
-    && umask 0000
+    && composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 ADD ./nginx.service /etc/service/nginx/run
 RUN chmod a+x /etc/service/nginx/run
