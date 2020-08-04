@@ -15,7 +15,7 @@ RUN apk update \
     binutils \
     musl \
     linux-headers &&\
-    apk add tzdata runit nginx freetype-dev gd-dev libjpeg-turbo-dev libpng-dev libmcrypt-dev libevent-dev git bash libzip-dev gnu-libiconv  && \
+    apk add tzdata runit nginx freetype-dev gd-dev libjpeg-turbo-dev libpng-dev libmcrypt-dev libevent-dev bash libzip-dev gnu-libiconv openldap-dev  && \
     cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
     echo "${TIMEZONE}" > /etc/timezone && \
     sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /usr/local/etc/php-fpm.conf && \
@@ -23,7 +23,7 @@ RUN apk update \
     docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir &&\
     docker-php-ext-install -j$(nproc) gd &&\
     docker-php-ext-install pdo_mysql mysqli bcmath sockets opcache zip ldap && pecl channel-update pecl.php.net && pecl install seaslog redis xdebug &&\
-    docker-php-ext-enable seaslog mysqli ldap redis && pecl clear-cache &&\
+    docker-php-ext-enable seaslog redis && pecl clear-cache &&\
     mkdir -p /run/nginx \
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
