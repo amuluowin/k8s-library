@@ -69,6 +69,16 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf sdebug \
 
+    && git clone https://github.com/amuluowin/php-ext-snowflake.git \
+    && (\
+        cd php-ext-snowflake \
+        && phpize \
+        && ./configure --enable-snowflake\
+        && make -j \
+        && make install \
+    ) \
+    && rm -rf php-ext-snowflake \
+
     && wget https://github.com/osgochina/donkeyid/archive/donkeyid-1.1.tar.gz -O donkeyid.tar.gz \
     && mkdir -p donkeyid \
     && tar -xf donkeyid.tar.gz -C donkeyid --strip-components=1 \
@@ -115,7 +125,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf ext-orm \
     
-    && docker-php-ext-enable msgpack yaml inotify donkeyid xlswriter igbinary swoole_orm  \
+    && docker-php-ext-enable msgpack yaml inotify donkeyid xlswriter igbinary swoole_orm snowflake \
 
     # && wget -P /usr/bin https://github.com/swoole/phpx/releases/download/v0.2.0/phpx \
     # && chmod +x /usr/bin/phpx \
