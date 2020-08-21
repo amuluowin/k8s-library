@@ -2,6 +2,8 @@ FROM php:7.4-cli-alpine
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
+RUN  sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 RUN apk update && apk add --no-cache --virtual .build-deps \
@@ -52,7 +54,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && ./configure --enable-mysqlnd --enable-openssl --enable-http2 --enable-sockets \
         && make -j \
         && make install \
-        && echo "extension=swoole.so">/usr/local/etc/php/conf.d/00-swoole.ini \
+        && echo "extendsion=swoole.so">/usr/local/etc/php/conf.d/00-swoole.ini \
     ) \
     && rm -rf swoole \
     
