@@ -100,7 +100,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && ./configure --enable-swoole \
         && make -j \
         && make install \
-        && echo "extendsion=SeasClick.so">/usr/local/etc/php/conf.d/docker-php-ext-zseasclick.ini \
+        && echo "extension=SeasClick.so">/usr/local/etc/php/conf.d/docker-php-ext-zseasclick.ini \
     ) \
     && rm -rf SeasClick \
     
@@ -114,7 +114,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && ./configure \
         && make -j \
         && make install \
-        && echo "extendsion=rdkafka.so">/usr/local/etc/php/conf.d/docker-php-ext-zrdkafka.ini \
+        && echo "extension=rdkafka.so">/usr/local/etc/php/conf.d/docker-php-ext-zrdkafka.ini \
     ) \
     && rm -rf php-rdkafka \
     
