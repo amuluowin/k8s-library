@@ -54,7 +54,6 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && ./configure --enable-mysqlnd --enable-openssl --enable-http2 --enable-sockets \
         && make -j \
         && make install \
-        && echo "extendsion=swoole.so">/usr/local/etc/php/conf.d/00-swoole.ini \
     ) \
     && rm -rf swoole \
     
@@ -101,6 +100,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && ./configure --enable-swoole \
         && make -j \
         && make install \
+        && echo "extendsion=SeasClick.so">/usr/local/etc/php/conf.d/docker-php-ext-zseasclick.ini \
     ) \
     && rm -rf SeasClick \
     
@@ -114,6 +114,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && ./configure \
         && make -j \
         && make install \
+        && echo "extendsion=rdkafka.so">/usr/local/etc/php/conf.d/docker-php-ext-zrdkafka.ini \
     ) \
     && rm -rf php-rdkafka \
     
@@ -127,7 +128,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf ext-orm \
     
-    && docker-php-ext-enable msgpack yaml inotify donkeyid xlswriter igbinary swoole_orm snowflake \
+    && docker-php-ext-enable msgpack yaml inotify donkeyid xlswriter igbinary swoole_orm snowflake swoole \
 
     # && wget -P /usr/bin https://github.com/swoole/phpx/releases/download/v0.2.0/phpx \
     # && chmod +x /usr/bin/phpx \
