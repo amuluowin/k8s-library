@@ -79,19 +79,6 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && make install \
     ) \
     && rm -rf php-ext-snowflake \
-
-    && wget https://github.com/osgochina/donkeyid/archive/donkeyid-1.1.tar.gz -O donkeyid.tar.gz \
-    && mkdir -p donkeyid \
-    && tar -xf donkeyid.tar.gz -C donkeyid --strip-components=1 \
-    && rm -f donkeyid.tar.gz \
-    && (\
-        cd donkeyid \
-        && phpize \
-        && ./configure \
-        && make -j \
-        && make install \
-    ) \
-    && rm -rf donkeyid \
     
     && git clone https://github.com/amuluowin/SeasClick.git \
     && (\
@@ -103,6 +90,17 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && echo "extension=SeasClick.so">/usr/local/etc/php/conf.d/docker-php-ext-zseasclick.ini \
     ) \
     && rm -rf SeasClick \
+
+    && git clone https://github.com/swoole/ext-postgresql.git \
+        && (\
+        cd ext-postgresql \
+        && phpize \
+        && ./configure \
+        && make -j \
+        && make install \
+        && echo "extension=swoole_postgresql.so">/usr/local/etc/php/conf.d/docker-php-ext-zswoole_postgresql.ini \
+    ) \
+    && rm -rf ext-postgresql \
     
     && git clone https://github.com/amuluowin/php-rdkafka.git \
     && (\
@@ -128,7 +126,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf ext-orm \
     
-    && docker-php-ext-enable msgpack yaml inotify donkeyid xlswriter igbinary swoole_orm snowflake swoole \
+    && docker-php-ext-enable msgpack yaml inotify xlswriter igbinary swoole_orm snowflake swoole \
 
     # && wget -P /usr/bin https://github.com/swoole/phpx/releases/download/v0.2.0/phpx \
     # && chmod +x /usr/bin/phpx \
