@@ -90,17 +90,6 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && echo "extension=SeasClick.so">/usr/local/etc/php/conf.d/docker-php-ext-zseasclick.ini \
     ) \
     && rm -rf SeasClick \
-
-    && git clone https://github.com/swoole/ext-postgresql.git \
-        && (\
-        cd ext-postgresql \
-        && phpize \
-        && ./configure \
-        && make -j \
-        && make install \
-        && echo "extension=swoole_postgresql.so">/usr/local/etc/php/conf.d/docker-php-ext-zswoole_postgresql.ini \
-    ) \
-    && rm -rf ext-postgresql \
     
     && git clone https://github.com/amuluowin/php-rdkafka.git \
     && (\
@@ -128,29 +117,6 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     
     && docker-php-ext-enable msgpack yaml inotify xlswriter igbinary swoole_orm snowflake swoole \
 
-    # && wget -P /usr/bin https://github.com/swoole/phpx/releases/download/v0.2.0/phpx \
-    # && chmod +x /usr/bin/phpx \
-    # && wget https://github.com/swoole/phpx/archive/v0.2.0.tar.gz -O phpx.tar.gz \
-    # && mkdir -p phpx \
-    # && tar -xf phpx.tar.gz -C phpx --strip-components=1 \
-    # && rm -f phpx.tar.gz \
-    # && ( \
-    #     cd phpx \
-    #     && cmake . \
-    #     && make -j \
-    #     && make install \
-    # ) \
-    # && rm -rf phpx \
-
-    # && git clone https://github.com/matyhtf/php-kcp.git \
-    # && (\
-    #     cd php-kcp \
-    #     && phpx build -v \
-    #     && phpx install \
-    # ) \
-    # && rm -rf php-kcp \
-
-    # && docker-php-ext-enable kcp && pecl clear-cache \
     && pecl clear-cache \
 
     && apk del .build-deps \
