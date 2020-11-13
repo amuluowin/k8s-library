@@ -23,7 +23,7 @@ RUN apk update \
     docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir &&\
     docker-php-ext-install -j$(nproc) gd &&\
     docker-php-ext-install pdo_mysql mysqli bcmath sockets opcache zip ldap && pecl channel-update pecl.php.net && pecl install seaslog redis xdebug &&\
-    docker-php-ext-enable seaslog redis && pecl clear-cache &&\
+    docker-php-ext-enable redis && pecl clear-cache &&\
     mkdir -p /run/nginx \
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
