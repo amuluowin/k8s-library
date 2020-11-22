@@ -42,9 +42,9 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && echo 'Asia/Shanghai' > /etc/timezone \
 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) soap pdo_mysql bcmath opcache sockets zip gmp gd && pecl install msgpack yaml inotify igbinary seaslog xlswriter \
+    && docker-php-ext-install -j$(nproc) soap pdo_mysql bcmath opcache sockets zip gmp gd && pecl install msgpack yaml inotify igbinary xlswriter \
 
-    && wget https://github.com/swoole/swoole-src/archive/v4.5.7.tar.gz -O swoole.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v4.5.8.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm -f swoole.tar.gz \
