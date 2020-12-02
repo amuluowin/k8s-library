@@ -91,31 +91,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf SeasClick \
     
-    && git clone https://github.com/amuluowin/php-rdkafka.git \
-    && (\
-        cd php-rdkafka && git submodule update --init \
-        && cd lib/librdkafka \
-        && ./configure --install-deps \
-        && cd ../../ \
-        && phpize \
-        && ./configure \
-        && make -j \
-        && make install \
-        && echo "extension=rdkafka.so">/usr/local/etc/php/conf.d/docker-php-ext-zrdkafka.ini \
-    ) \
-    && rm -rf php-rdkafka \
-    
-    && git clone https://github.com/amuluowin/ext-orm.git \
-    && (\
-        cd ext-orm \
-        && phpize \
-        && ./configure \
-        && make -j \
-        && make install \
-    ) \
-    && rm -rf ext-orm \
-    
-    && docker-php-ext-enable msgpack yaml inotify xlswriter igbinary swoole_orm snowflake swoole \
+    && docker-php-ext-enable msgpack yaml inotify xlswriter igbinary snowflake swoole \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && pecl clear-cache \
