@@ -91,7 +91,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf SeasClick \
     
-    && docker-php-ext-enable msgpack yaml inotify xlswriter igbinary snowflake swoole \
+    && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowflake swoole \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && pecl clear-cache \
