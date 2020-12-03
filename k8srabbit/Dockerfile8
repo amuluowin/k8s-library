@@ -33,6 +33,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     libmcrypt-dev \
     gmp-dev \
     oniguruma-dev \
+    libffi-dev \
 
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
@@ -40,7 +41,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && wget https://github.com/FriendsOfPHP/pickle/releases/download/v0.6.0/pickle.phar && chmod +x pickle.phar && mv pickle.phar /usr/local/bin/pickle \
 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) bcmath zip gmp gd \
+    && docker-php-ext-install -j$(nproc) bcmath zip gmp gd pdo_mysql ffi \
     && pickle install igbinary \
     && pickle install yaml \
 
@@ -88,7 +89,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf php-ext-excel-export \
     
-    && docker-php-ext-enable yaml igbinary xlswriter snowflake swoole \
+    && docker-php-ext-enable opcache yaml igbinary xlswriter snowflake swoole \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1255\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && apk del .build-deps \
