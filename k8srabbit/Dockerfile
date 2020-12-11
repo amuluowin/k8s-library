@@ -84,8 +84,6 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowflake swoole \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
-    && pecl clear-cache \
-
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
     && mkdir -p /data && chmod a+x /usr/bin/composer
