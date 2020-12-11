@@ -42,6 +42,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && docker-php-ext-install -j$(nproc) bcmath zip gmp gd pdo_mysql ffi \
     && pickle install igbinary \
     && pickle install yaml \
+    && pickle install msgpack \
 
     && wget https://github.com/swoole/swoole-src/archive/v4.6.0-alpha.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
@@ -76,7 +77,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf php-ext-excel-export \
     
-    && docker-php-ext-enable opcache yaml igbinary xlswriter snowflake swoole \
+    && docker-php-ext-enable opcache yaml igbinary xlswriter snowflake swoole msgpack \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1255\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && apk del .build-deps \
