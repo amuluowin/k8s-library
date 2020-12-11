@@ -21,30 +21,31 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     git \
     rapidjson-dev \
     bash \
-    && apk add --no-cache cyrus-sasl-dev lz4-dev zstd-dev \
+    && apk add --no-cache \
     libcurl \
     yaml-dev \
-    libxml2-dev \
-    pcre-dev \
-    perl-dev \
+    # libxml2-dev \
     openssl-dev \
     freetype-dev \
     libjpeg-turbo-dev \
     libpng-dev \
     libzip-dev \
     libmcrypt-dev \
-    cifs-utils \
-    poppler-utils \
-    poppler-data \
     gmp-dev \
 
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
+    && wget https://github.com/FriendsOfPHP/pickle/releases/download/v0.6.0/pickle.phar && chmod +x pickle.phar && mv pickle.phar /usr/local/bin/pickle \
 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) soap pdo_mysql bcmath opcache sockets zip gmp gd && pecl install msgpack yaml inotify igbinary xlswriter \
+    && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd \
+    && pickle install msgpack \
+    && pickle install inotify \
+    && pickle install igbinary \
+    && pickle install yaml \
+    && pickle install xlswriter \
 
-    && wget https://github.com/swoole/swoole-src/archive/v4.5.8.tar.gz -O swoole.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v4.5.9.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm -f swoole.tar.gz \
@@ -80,17 +81,6 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf php-ext-snowflake \
     
-    && git clone https://github.com/amuluowin/SeasClick.git \
-    && (\
-        cd SeasClick && git submodule update --init \
-        && phpize \
-        && ./configure --enable-swoole \
-        && make -j \
-        && make install \
-        && echo "extension=SeasClick.so">/usr/local/etc/php/conf.d/docker-php-ext-zseasclick.ini \
-    ) \
-    && rm -rf SeasClick \
-    
     && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowflake swoole \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
@@ -104,4 +94,4 @@ WORKDIR /data
 
 EXPOSE 80
 
-CMD ["php", "bin/rabbit", "server","start"]
+CMD ["php", "bin/rabbit", "async:server","start"]
