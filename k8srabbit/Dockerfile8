@@ -44,7 +44,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && pickle install yaml \
     && pickle install msgpack \
 
-    && wget https://github.com/swoole/swoole-src/archive/v4.6.0-beta.tar.gz -O swoole.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v4.6.0.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm -f swoole.tar.gz \
