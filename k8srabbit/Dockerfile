@@ -18,12 +18,11 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     libaio-dev \
     zlib-dev \
     tzdata \
-    git \
-    rapidjson-dev \
     bash \
     && apk add --no-cache \
     libcurl \
-    libcurl-dev \
+    git \
+    curl-dev \
     yaml-dev \
     # libxml2-dev \
     openssl-dev \
