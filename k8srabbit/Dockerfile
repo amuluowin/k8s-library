@@ -23,6 +23,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     bash \
     && apk add --no-cache \
     libcurl \
+    libcurl-dev \
     yaml-dev \
     # libxml2-dev \
     openssl-dev \
