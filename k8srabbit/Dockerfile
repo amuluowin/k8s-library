@@ -43,7 +43,6 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && pickle install inotify \
     && pickle install igbinary \
     && pickle install yaml \
-    && pickle install xlswriter \
 
     && wget https://github.com/swoole/swoole-src/archive/v4.6.0.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
@@ -80,6 +79,19 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && make install \
     ) \
     && rm -rf php-ext-snowflake \
+
+    && wget https://github.com/viest/php-ext-xlswriter/archive/v1.3.7.tar.gz -O xlswriter.tar.gz \
+    && mkdir -p xlswriter \
+    && tar -xf xlswriter.tar.gz -C xlswriter --strip-components=1 \
+    && rm -f swoole.tar.gz \
+    && (\
+        cd xlswriter \
+        && phpize \
+        && ./configure --enable-reader \
+        && make -j \
+        && make install \
+    ) \
+    && rm -rf xlswriter \
     
     && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowflake swoole \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
