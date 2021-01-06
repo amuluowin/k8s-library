@@ -80,18 +80,15 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf php-ext-snowflake \
 
-    && wget https://github.com/viest/php-ext-xlswriter/archive/v1.3.7.tar.gz -O xlswriter.tar.gz \
-    && mkdir -p xlswriter \
-    && tar -xf xlswriter.tar.gz -C xlswriter --strip-components=1 \
-    && rm -f swoole.tar.gz \
+    && git clone https://github.com/viest/php-ext-excel-export \
     && (\
-        cd xlswriter \
+        cd php-ext-excel-export &&  git submodule update --init \
         && phpize \
         && ./configure --enable-reader \
         && make -j \
         && make install \
     ) \
-    && rm -rf xlswriter \
+    && rm -rf php-ext-excel-export \
     
     && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowflake swoole \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
