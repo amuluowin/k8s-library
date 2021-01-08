@@ -38,7 +38,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && wget https://github.com/FriendsOfPHP/pickle/releases/download/v0.6.0/pickle.phar && chmod +x pickle.phar && mv pickle.phar /usr/local/bin/pickle \
 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd \
+    && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd raphf http \
     && pickle install msgpack \
     && pickle install inotify \
     && pickle install igbinary \
