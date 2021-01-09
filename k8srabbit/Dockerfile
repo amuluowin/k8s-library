@@ -35,14 +35,13 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
 
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
-    && wget https://github.com/FriendsOfPHP/pickle/releases/download/v0.6.0/pickle.phar && chmod +x pickle.phar && mv pickle.phar /usr/local/bin/pickle \
 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd raphf http \
-    && pickle install msgpack \
-    && pickle install inotify \
-    && pickle install igbinary \
-    && pickle install yaml \
+    && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd \
+    && pecl install msgpack inotify igbinary yaml raphf xlswriter \
+    && docker-php-ext-enable raphf \
+    && pecl install pecl_http-4.0.0beta1 \
+    && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
 
     && wget https://github.com/swoole/swoole-src/archive/v4.6.0.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
@@ -79,22 +78,12 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && make install \
     ) \
     && rm -rf php-ext-snowflake \
-
-    && git clone https://github.com/viest/php-ext-excel-export \
-    && (\
-        cd php-ext-excel-export &&  git submodule update --init \
-        && phpize \
-        && ./configure --enable-reader \
-        && make -j \
-        && make install \
-    ) \
-    && rm -rf php-ext-excel-export \
     
     && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowflake swoole \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && apk del .build-deps \
-    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
+    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* \
     && mkdir -p /data && chmod a+x /usr/bin/composer
 
 WORKDIR /data
