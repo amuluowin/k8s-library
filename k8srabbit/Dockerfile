@@ -12,7 +12,6 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     make \
     autoconf \
     libmcrypt-dev \
-    icu-dev \
     libc-dev \
     linux-headers \
     libaio-dev \
@@ -21,6 +20,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     bash \
     && apk add --no-cache \
     libcurl \
+    icu-dev \
     git \
     curl-dev \
     yaml-dev \
