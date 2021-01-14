@@ -56,18 +56,18 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf swoole \
     
-    && wget https://github.com/swoole/sdebug/archive/sdebug_2_9-beta.tar.gz -O sdebug.tar.gz \
-    && mkdir -p sdebug \
-    && tar -xf sdebug.tar.gz -C sdebug --strip-components=1 \
-    && rm -f sdebug.tar.gz \
+    && wget https://github.com/swoole/yasd/archive/v0.3.5.tar.gz -O yasd.tar.gz \
+    && mkdir -p yasd \
+    && tar -xf yasd.tar.gz -C yasd --strip-components=1 \
+    && rm -f yasd.tar.gz \
     && (\
-        cd sdebug \
+        cd yasd \
         && phpize \
-        && ./configure --enable-xdebug \
+        && ./configure \
         && make -j$(nproc) \
         && make install \
     ) \
-    && rm -rf sdebug \
+    && rm -rf yasd \
 
     && git clone https://github.com/amuluowin/php-ext-snowflake.git \
     && (\

@@ -58,6 +58,19 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf swoole \
 
+    && wget https://github.com/swoole/yasd/archive/v0.3.5.tar.gz -O yasd.tar.gz \
+    && mkdir -p yasd \
+    && tar -xf yasd.tar.gz -C yasd --strip-components=1 \
+    && rm -f yasd.tar.gz \
+    && (\
+        cd yasd \
+        && phpize \
+        && ./configure \
+        && make -j$(nproc) \
+        && make install \
+    ) \
+    && rm -rf yasd \
+
     && git clone https://github.com/amuluowin/php-ext-snowflake.git \
     && (\
         cd php-ext-snowflake \
