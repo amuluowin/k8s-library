@@ -19,6 +19,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     tzdata \
     bash \
     && apk add --no-cache \
+    boost-dev \
     libcurl \
     icu-dev \
     git \
