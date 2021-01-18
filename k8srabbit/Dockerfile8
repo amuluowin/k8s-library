@@ -53,7 +53,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && ( \
         cd swoole \
         && phpize \
-        && ./configure --enable-openssl --enable-http2 --enable-swoole-curl \
+        && ./configure --enable-openssl --enable-http2 \
         && make -j \
         && make install \
     ) \
