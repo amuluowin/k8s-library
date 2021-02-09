@@ -10,6 +10,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     g++ \
     gcc \
     make \
+    cmake \
     autoconf \
     libmcrypt-dev \
     libc-dev \
@@ -44,20 +45,17 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && pecl install pecl_http \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
 
-    && wget https://github.com/swoole/swoole-src/archive/v4.6.1.tar.gz -O swoole.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v4.6.3.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm -f swoole.tar.gz \
     && ( \
         cd swoole \
-        && phpize \
-        && ./configure --enable-openssl --enable-http2 \
-        && make -j \
-        && make install \
+        && sh make.sh cmake \
     ) \
     && rm -rf swoole \
     
-    && wget https://github.com/swoole/yasd/archive/v0.3.5.tar.gz -O yasd.tar.gz \
+    && wget https://github.com/swoole/yasd/archive/v0.3.7.tar.gz -O yasd.tar.gz \
     && mkdir -p yasd \
     && tar -xf yasd.tar.gz -C yasd --strip-components=1 \
     && rm -f yasd.tar.gz \
