@@ -42,7 +42,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd \
     && pecl install msgpack inotify igbinary yaml raphf propro xlswriter \
     && docker-php-ext-enable raphf propro \
-    && pecl install pecl_http \
+    && pecl install pecl_http-3.2.3 \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
 
     && wget https://github.com/swoole/swoole-src/archive/v4.6.3.tar.gz -O swoole.tar.gz \
