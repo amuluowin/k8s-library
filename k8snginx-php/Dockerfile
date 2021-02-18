@@ -23,7 +23,8 @@ RUN apk update \
     docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir &&\
     docker-php-ext-install -j$(nproc) gd &&\
     docker-php-ext-install pdo_mysql mysqli bcmath sockets opcache zip ldap && pecl channel-update pecl.php.net && pecl install seaslog redis xdebug &&\
-    docker-php-ext-enable redis && pecl clear-cache &&\
+    docker-php-ext-enable redis opcache && pecl clear-cache &&\
+    echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini &&\
     mkdir -p /run/nginx \
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
