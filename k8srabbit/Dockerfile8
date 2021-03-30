@@ -82,7 +82,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && rm -rf php-ext-snowflake \
     
     && docker-php-ext-enable opcache yaml igbinary xlswriter snowflake swoole msgpack \
-    && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1255\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
+    && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1205\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* \
