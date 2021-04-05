@@ -1,0 +1,89 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+require __DIR__ . '/vendor/autoload.php';
+
+use Swow\Coroutine;
+use Swow\Coroutine\Exception as CoroutineException;
+use Swow\Http\Exception as HttpException;
+use Swow\Http\Server as HttpServer;
+use Swow\Http\Status as HttpStatus;
+use Swow\Socket;
+use Swow\Socket\Exception as SocketException;
+use const Swow\Errno\EMFILE;
+use const Swow\Errno\ENFILE;
+use const Swow\Errno\ENOMEM;
+
+
+$port = isset($argv[1]) ? (int)$argv[1] : 8099;
+
+function run(int $port): void
+{
+    $bindFlag = Socket::BIND_FLAG_NONE | Socket::BIND_FLAG_REUSEPORT;
+    $server = new HttpServer();
+    $server->setTcpAcceptBalance(true);
+    $server->bind('0.0.0.0', $port, $bindFlag)->listen(81920);
+    $worker_id = (int)ini_get('snowdrift.WorkerId');
+    while (true) {
+        try {
+            $session = $server->acceptSession();
+            Coroutine::run(function () use ($session, $worker_id) {
+                try {
+                    while (true) {
+                        $request = null;
+                        try {
+                            $request = $session->recvHttpRequest();
+                            if ($request->getPath() === '/') {
+                                $params = $request->getQueryParams();
+                                $wid = isset($params['wid']) ? (int)$params['wid'] : $worker_id;
+                                $num = isset($params['num']) ? (int)$params['num'] : 1;
+                                if ($num > 1) {
+                                    $session->respond((string)SnowDrift::NextNumId($num, $wid));
+                                } else {
+                                    $session->respond((string)SnowDrift::NextId($wid));
+                                }
+                            } else {
+                                $session->error(HttpStatus::NOT_FOUND);
+                            }
+                        } catch (HttpException $exception) {
+                            $session->error($exception->getCode(), $exception->getMessage());
+                        }
+                        if (!$request || !$request->getKeepAlive()) {
+                            break;
+                        }
+                    }
+                } catch (Exception $exception) {
+                    // you can log error here
+                } finally {
+                    $session->close();
+                }
+            });
+        } catch (SocketException | CoroutineException $exception) {
+            if (in_array($exception->getCode(), [EMFILE, ENFILE, ENOMEM], true)) {
+                sleep(1);
+            } else {
+                break;
+            }
+        }
+    }
+}
+
+$pnum = (int)trim(shell_exec("cat /proc/cpuinfo | grep 'cpu cores' | wc -l"));
+pcntl_signal(SIGCHLD, SIG_IGN);
+for ($i = 0; $i < $pnum; $i++) {
+    $pid = pcntl_fork(); // 开启新进程
+    if ($pid === -1) {
+        die("could not fork"); // 开启失败
+    } elseif ($pid) {
+        echo "$pid started listen on $port" . PHP_EOL;
+    } else {
+        cli_set_process_title("swow idgen $i");
+        run($port);
+    }
+}
+
+while (true) {
+    sleep(1);
+}
