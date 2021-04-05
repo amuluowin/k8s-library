@@ -30,7 +30,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && echo 'Asia/Shanghai' > /etc/timezone \
     && chmod a+x /usr/bin/composer \
 
-    && docker-php-ext-install -j$(nproc) opcache gmp \
+    && docker-php-ext-install -j$(nproc) opcache pcntl gmp \
 
     && git clone https://gitee.com/laoyaosu/idgenerator.git \
     && (\
@@ -47,7 +47,8 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1205\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && apk del .build-deps \
-    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/*
+    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* \
+    && chmod +x /data/swow
 
 WORKDIR /data
 
