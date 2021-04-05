@@ -40,7 +40,11 @@ function run(int $port): void
                                 $wid = isset($params['wid']) ? (int)$params['wid'] : $worker_id;
                                 $num = isset($params['num']) ? (int)$params['num'] : 1;
                                 if ($num > 1) {
-                                    $session->respond((string)SnowDrift::NextNumId($num, $wid));
+                                    $arr = [];
+                                    for ($i = 0; $i < $num; $i++) {
+                                        $arr[] = SnowDrift::NextId($wid);
+                                    }
+                                    $session->respond(json_encode($arr));
                                 } else {
                                     $session->respond((string)SnowDrift::NextId($wid));
                                 }

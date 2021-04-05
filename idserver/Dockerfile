@@ -54,4 +54,4 @@ WORKDIR /data
 
 EXPOSE 8099
 
-CMD ["swow"]
+CMD ["./swow"]
