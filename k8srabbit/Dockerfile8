@@ -71,18 +71,18 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf yasd \
 
-    && git clone https://github.com/amuluowin/php-ext-snowflake.git \
+    && git clone https://gitee.com/laoyaosu/idgenerator.git \
     && (\
-        cd php-ext-snowflake \
+        cd ./idgenerator/PHP \
         && phpize \
-        && ./configure --enable-snowflake\
+        && ./configure \
         && make -j \
         && make install \
-    ) \
-    && rm -rf php-ext-snowflake \
+    )  && rm -rf idgenerator \
     
-    && docker-php-ext-enable opcache yaml igbinary xlswriter snowflake swoole msgpack \
+    && docker-php-ext-enable opcache yaml igbinary xlswriter snowdrift swoole msgpack \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1205\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
+    && echo -e "snowdrift.WorkerIdNum=63\nsnowdrift.SeqBitLength=10\nsnowdrift.TopOverCostCount=10000\nsnowdrift.Lock=1" >> /usr/local/etc/php/conf.d/docker-php-ext-snowdrift.ini \
 
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* \
