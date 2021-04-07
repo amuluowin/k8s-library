@@ -18,19 +18,14 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     libaio-dev \
     zlib-dev \
     tzdata \
-    bash \
-    && apk add --no-cache \
-    libcurl \
     git \
-    openssl-dev \
-    gmp-dev \
-    libffi-dev \
+    bash \
 
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
     && chmod a+x /usr/bin/composer \
 
-    && docker-php-ext-install -j$(nproc) opcache pcntl gmp \
+    && docker-php-ext-install -j$(nproc) opcache pcntl \
 
     && git clone https://gitee.com/laoyaosu/idgenerator.git \
     && (\
@@ -39,12 +34,12 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && ./configure \
         && make -j \
         && make install \
-        && echo -e "snowdrift.WorkerIdNum=63\nsnowdrift.SeqBitLength=10\nsnowdrift.TopOverCostCount=10000\nsnowdrift.Lock=1" >> /usr/local/etc/php/conf.d/docker-php-ext-snowdrift.ini \
-        && cd /data && composer require swow/swow dev-develop -o && ./vendor/bin/swow-builder \
+        && echo -e "extension=snowdrift\nsnowdrift.WorkerIdNum=63\nsnowdrift.SeqBitLength=10\nsnowdrift.TopOverCostCount=10000" >> /usr/local/etc/php/conf.d/docker-php-ext-snowdrift.ini \
+        && composer require swow/swow dev-develop -o && ./vendor/bin/swow-builder \
     )  && rm -rf idgenerator \
 
-    && docker-php-ext-enable opcache snowdrift swow \
-    && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1205\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
+    && docker-php-ext-enable swow \
+    && echo -e "zend_extension=opcache\nopcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1205\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* \

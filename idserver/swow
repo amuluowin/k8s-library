@@ -3,74 +3,107 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/vendor/autoload.php';
-
+use Swow\Buffer;
 use Swow\Coroutine;
-use Swow\Coroutine\Exception as CoroutineException;
-use Swow\Http\Exception as HttpException;
-use Swow\Http\Server as HttpServer;
-use Swow\Http\Status as HttpStatus;
+use Swow\Http\Parser;
+use Swow\Http\Parser\Exception as ParserException;
 use Swow\Socket;
 use Swow\Socket\Exception as SocketException;
-use const Swow\Errno\EMFILE;
-use const Swow\Errno\ENFILE;
-use const Swow\Errno\ENOMEM;
 
+use function Swow\Http\packResponse;
 
-$port = isset($argv[1]) ? (int)$argv[1] : 8099;
+$host = getenv('SERVER_HOST') ?: '0.0.0.0';
+$port = isset($argv[1]) ? (int)$argv[1] : (int) (getenv('SERVER_PORT') ?: 8099);
 
-function run(int $port): void
+function run(string $host, int $port): void
 {
     $bindFlag = Socket::BIND_FLAG_NONE | Socket::BIND_FLAG_REUSEPORT;
-    $server = new HttpServer();
+    $server = new Socket(Socket::TYPE_TCP);
     $server->setTcpAcceptBalance(true);
-    $server->bind('0.0.0.0', $port, $bindFlag)->listen(81920);
+    $server->bind($host, $port, $bindFlag)->listen(81920);
     $worker_id = (int)ini_get('snowdrift.WorkerId');
     while (true) {
         try {
-            $session = $server->acceptSession();
-            Coroutine::run(function () use ($session, $worker_id) {
-                try {
+            $client = $server->accept();
+        } catch (SocketException $exception) {
+            break;
+        }
+        $parser = (new Parser())->setType(Parser::TYPE_REQUEST)->setEvents(Parser::EVENT_URL);
+        Coroutine::run(function () use ($client, $parser, $worker_id) {
+            $buffer = new Buffer();
+            $body = null;
+            try {
+                while (true) {
+                    $length = $client->recvData($buffer);
+                    if ($length === 0) {
+                        break;
+                    }
+                    $data = '';
+                    $path = '';
+                    $params = [];
                     while (true) {
-                        $request = null;
-                        try {
-                            $request = $session->recvHttpRequest();
-                            if ($request->getPath() === '/') {
-                                $params = $request->getQueryParams();
-                                $wid = isset($params['wid']) ? (int)$params['wid'] : $worker_id;
-                                $num = isset($params['num']) ? (int)$params['num'] : 1;
-                                if ($num > 1) {
-                                    $arr = [];
-                                    for ($i = 0; $i < $num; $i++) {
-                                        $arr[] = SnowDrift::NextId($wid);
+                        $event = $parser->execute($buffer, $data);
+                        if ($event === Parser::EVENT_URL) {
+                            $uriParts = \explode('?', $data, 2);
+                            $path = \rawurldecode($uriParts[0]);
+                            parse_str($uriParts[1] ?? '', $params);
+                        }
+                        if ($parser->isCompleted()) {
+                            if ($body === null) {
+                                $body = new Buffer();
+                            }
+                            if ($parser->getMethod() === 'GET') {
+                                if ($path === '/' || $path === '') {
+                                    $wid = isset($params['wid']) ? (int)$params['wid'] : $worker_id;
+                                    $num = isset($params['num']) ? (int)$params['num'] : 1;
+                                    if ($num > 1) {
+                                        $arr = [];
+                                        for ($i = 0; $i < $num; $i++) {
+                                            $arr[] = SnowDrift::NextId($wid);
+                                        }
+                                        $body->write(json_encode($arr));
+                                    } else {
+                                        $body->write((string)SnowDrift::NextId($wid));
                                     }
-                                    $session->respond(json_encode($arr));
+                                    $response = sprintf(
+                                        "HTTP/1.1 200 OK\r\n" .
+                                            "Connection: %s\r\n" .
+                                            "Content-Length: %d\r\n\r\n" .
+                                            '%s',
+                                        $parser->shouldKeepAlive() ? 'Keep-Alive' : 'Closed',
+                                        $body ? $body->getLength() : 0,
+                                        $body ? $body->toString() : ''
+                                    );
                                 } else {
-                                    $session->respond((string)SnowDrift::NextId($wid));
+                                    $response = packResponse(404, [
+                                        "Connection" => $parser->shouldKeepAlive() ? 'Keep-Alive' : 'Closed',
+                                        "Content-Length" => $body ? $body->getLength() : 0
+                                    ]);
                                 }
                             } else {
-                                $session->error(HttpStatus::NOT_FOUND);
+                                $response = packResponse(405, [
+                                    "Connection" => $parser->shouldKeepAlive() ? 'Keep-Alive' : 'Closed',
+                                    "Content-Length" => $body ? $body->getLength() : 0
+                                ]);
                             }
-                        } catch (HttpException $exception) {
-                            $session->error($exception->getCode(), $exception->getMessage());
-                        }
-                        if (!$request || !$request->getKeepAlive()) {
+                            $client->sendString($response);
+                            if ($body !== null) {
+                                $body->clear();
+                            }
                             break;
                         }
                     }
-                } catch (Exception $exception) {
-                    // you can log error here
-                } finally {
-                    $session->close();
+                    if (!$parser->shouldKeepAlive()) {
+                        break;
+                    }
                 }
-            });
-        } catch (SocketException | CoroutineException $exception) {
-            if (in_array($exception->getCode(), [EMFILE, ENFILE, ENOMEM], true)) {
-                sleep(1);
-            } else {
-                break;
+            } catch (SocketException $exception) {
+            } catch (ParserException $exception) {
+            } finally {
+                $parser->reset();
+                $client->close();
             }
-        }
+        });
     }
 }
 
@@ -84,7 +117,7 @@ for ($i = 0; $i < $pnum; $i++) {
         echo "$pid started listen on $port" . PHP_EOL;
     } else {
         cli_set_process_title("swow idgen $i");
-        run($port);
+        run($host, $port);
     }
 }
 
