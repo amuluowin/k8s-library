@@ -34,7 +34,7 @@ function run(string $host, int $port): void
             $body = null;
             try {
                 while (true) {
-                    $length = $client->recv($buffer);
+                    $length = $client->recvData($buffer);
                     if ($length === 0) {
                         break;
                     }
@@ -69,7 +69,7 @@ function run(string $host, int $port): void
                                         $body->write($ids);
                                         $response = sprintf(
                                             "HTTP/1.1 200 OK\r\n" .
-                                                "Context-Type: application/json\r\n" .
+                                                "Content-Type: application/json\r\n" .
                                                 "Connection: %s\r\n" .
                                                 "Content-Length: %d\r\n\r\n" .
                                                 '%s',
@@ -92,13 +92,13 @@ function run(string $host, int $port): void
                                 } else {
                                     $response = packResponse(404, [
                                         "Connection" => $parser->shouldKeepAlive() ? 'Keep-Alive' : 'Closed',
-                                        "Content-Length" => $body ? $body->getLength() : 0
+                                        "Content-Length" => 0
                                     ]);
                                 }
                             } else {
                                 $response = packResponse(405, [
                                     "Connection" => $parser->shouldKeepAlive() ? 'Keep-Alive' : 'Closed',
-                                    "Content-Length" => $body ? $body->getLength() : 0
+                                    "Content-Length" => 0
                                 ]);
                             }
                             $client->sendString($response);
