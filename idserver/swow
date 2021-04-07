@@ -28,14 +28,17 @@ function run(string $host, int $port): void
         } catch (SocketException $exception) {
             break;
         }
-        $parser = (new Parser())->setType(Parser::TYPE_REQUEST)->setEvents(Parser::EVENT_URL);
-        Coroutine::run(function () use ($client, $parser, $worker_id) {
+        Coroutine::run(function () use ($client, $worker_id) {
             $buffer = new Buffer();
+            $parser = (new Parser())->setType(Parser::TYPE_REQUEST)->setEvents(Parser::EVENT_URL | Parser::EVENT_NONE);
             $body = null;
             try {
                 while (true) {
-                    $length = $client->recvData($buffer);
+                    $length = $client->recv($buffer);
                     if ($length === 0) {
+                        break;
+                    }
+                    if ($length === false) {
                         break;
                     }
                     $data = '';
@@ -47,8 +50,9 @@ function run(string $host, int $port): void
                             $uriParts = \explode('?', $data, 2);
                             $path = \rawurldecode($uriParts[0]);
                             parse_str($uriParts[1] ?? '', $params);
-                        }
-                        if ($parser->isCompleted()) {
+                        } elseif ($event === Parser::EVENT_NONE) {
+                            break;
+                        } else {
                             if ($body === null) {
                                 $body = new Buffer();
                             }
@@ -96,6 +100,7 @@ function run(string $host, int $port): void
                     if (!$parser->shouldKeepAlive()) {
                         break;
                     }
+                    $parser->reset();
                 }
             } catch (SocketException $exception) {
             } catch (ParserException $exception) {
