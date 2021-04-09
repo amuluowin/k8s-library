@@ -45,7 +45,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && pecl install pecl_http-3.2.3 \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
 
-    && wget https://github.com/swoole/swoole-src/archive/v4.6.4.tar.gz -O swoole.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v4.6.5.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm -f swoole.tar.gz \
@@ -69,17 +69,16 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf yasd \
 
-    && git clone https://github.com/amuluowin/php-ext-snowflake.git \
+    && git clone https://gitee.com/laoyaosu/idgenerator.git \
     && (\
-        cd php-ext-snowflake \
+        cd ./idgenerator/PHP \
         && phpize \
-        && ./configure --enable-snowflake\
+        && ./configure \
         && make -j \
         && make install \
-    ) \
-    && rm -rf php-ext-snowflake \
+    )  && rm -rf idgenerator \
     
-    && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowflake swoole \
+    && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowdrift swoole \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && apk del .build-deps \
