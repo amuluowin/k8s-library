@@ -82,7 +82,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && apk del .build-deps \
-    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* \
+    && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* \
     && mkdir -p /data && chmod a+x /usr/bin/composer
 
 WORKDIR /data

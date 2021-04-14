@@ -27,7 +27,7 @@ RUN apk update \
     echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini &&\
     mkdir -p /run/nginx \
     && apk del .build-deps \
-    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
+    && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* \
     && composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 ADD ./nginx.service /etc/service/nginx/run
