@@ -6,6 +6,8 @@ RUN  sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositorie
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
+WORKDIR /data
+
 RUN apk update && apk add --no-cache --virtual .build-deps \
     g++ \
     gcc \
@@ -45,7 +47,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && pecl install pecl_http-3.2.3 \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
 
-    && wget https://github.com/swoole/swoole-src/archive/v4.6.6.tar.gz -O swoole.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v4.6.7.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm -f swoole.tar.gz \
@@ -56,7 +58,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf swoole \
     
-    && wget https://github.com/swoole/yasd/archive/v0.3.7.tar.gz -O yasd.tar.gz \
+    && wget https://github.com/swoole/yasd/archive/v0.3.8.tar.gz -O yasd.tar.gz \
     && mkdir -p yasd \
     && tar -xf yasd.tar.gz -C yasd --strip-components=1 \
     && rm -f yasd.tar.gz \
@@ -77,6 +79,8 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && make -j \
         && make install \
     )  && rm -rf idgenerator \
+
+    && composer require swow/swow dev-develop -o && vendor/bin/swow-builder --rebuild && rm -rf /data/* \
     
     && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowdrift swoole \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
@@ -84,8 +88,6 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && apk del .build-deps \
     && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* \
     && mkdir -p /data && chmod a+x /usr/bin/composer
-
-WORKDIR /data
 
 EXPOSE 80
 
