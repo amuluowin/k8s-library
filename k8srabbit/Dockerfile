@@ -6,8 +6,6 @@ RUN  sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositorie
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
-WORKDIR /data
-
 RUN apk update && apk add --no-cache --virtual .build-deps \
     g++ \
     gcc \
@@ -39,6 +37,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
 
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
+    && chmod a+x /usr/bin/composer \
 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd \
@@ -80,14 +79,17 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && make install \
     )  && rm -rf idgenerator \
 
-    && composer require swow/swow dev-develop -o && vendor/bin/swow-builder --rebuild && rm -rf /data/* \
+    && mkdir -p /data \
+    && && cd /data && composer require swow/swow dev-develop -o && vendor/bin/swow-builder --rebuild && rm -rf /data/* \
     
     && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowdrift swoole http \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && apk del .build-deps \
-    && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* \
-    && mkdir -p /data && chmod a+x /usr/bin/composer
+    && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/*
+    
+
+WORKDIR /data
 
 EXPOSE 80
 
