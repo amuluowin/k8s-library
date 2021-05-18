@@ -44,7 +44,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd \
     && pecl install msgpack inotify igbinary yaml raphf propro xlswriter redis \
     && docker-php-ext-enable raphf propro \
-    && pecl install pecl_http-3.2.3 \
+    && pecl install pecl_http-3.2.4 \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
 
     && wget https://github.com/swoole/swoole-src/archive/v4.6.7.tar.gz -O swoole.tar.gz \
@@ -82,7 +82,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
 
     && composer require swow/swow dev-develop -o && vendor/bin/swow-builder --rebuild && rm -rf /data/* \
     
-    && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowdrift swoole \
+    && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowdrift swoole http \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && apk del .build-deps \
