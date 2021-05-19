@@ -82,7 +82,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && mkdir -p /data \
     && && cd /data && composer require swow/swow dev-develop -o && vendor/bin/swow-builder --rebuild && rm -rf /data/* \
     
-    && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowdrift swoole http \
+    && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowdrift swoole http redis \
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && apk del .build-deps \
