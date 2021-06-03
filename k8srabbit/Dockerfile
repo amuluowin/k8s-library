@@ -20,7 +20,6 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     tzdata \
     bash \
     && apk add --no-cache \
-    boost-dev \
     libcurl \
     icu-dev \
     git \
@@ -39,9 +38,11 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && echo 'Asia/Shanghai' > /etc/timezone \
     && chmod a+x /usr/bin/composer \
 
+    && wget https://github.com/humanmade/alpine-v8/releases/download/8.0.426.27/v8.tar && tar -zxvf v8.tar && rm -f v8.tar \
+
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd \
-    && pecl install msgpack inotify igbinary yaml raphf propro xlswriter redis \
+    && pecl install msgpack inotify igbinary yaml raphf propro xlswriter redis v8js \
     && docker-php-ext-enable raphf propro \
     && pecl install pecl_http-3.2.4 \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
@@ -56,19 +57,6 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && make -j$(nproc) && make install \
     ) \
     && rm -rf swoole \
-    
-    && wget https://github.com/swoole/yasd/archive/v0.3.8.tar.gz -O yasd.tar.gz \
-    && mkdir -p yasd \
-    && tar -xf yasd.tar.gz -C yasd --strip-components=1 \
-    && rm -f yasd.tar.gz \
-    && (\
-        cd yasd \
-        && phpize \
-        && ./configure \
-        && make -j$(nproc) \
-        && make install \
-    ) \
-    && rm -rf yasd \
 
     && git clone https://gitee.com/laoyaosu/idgenerator.git \
     && (\
@@ -81,7 +69,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
 
     && mkdir -p /data \
     
-    && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowdrift swoole http redis \
+    && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowdrift swoole http redis v8js\
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && apk del .build-deps \
