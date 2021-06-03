@@ -60,12 +60,12 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
 
     && git clone https://github.com/yitter/IdGenerator.git \
     && (\
-        cd ./idgenerator/PHP \
+        cd ./IdGenerator/PHP \
         && phpize \
         && ./configure \
         && make -j \
         && make install \
-    )  && rm -rf idgenerator \
+    )  && rm -rf IdGenerator \
 
     && mkdir -p /data \
     
