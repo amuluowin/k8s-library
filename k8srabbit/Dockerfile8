@@ -39,7 +39,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && echo 'Asia/Shanghai' > /etc/timezone \
     && chmod a+x /usr/bin/composer \
 
-    && wget https://github.com/humanmade/alpine-v8/releases/download/8.0.426.27/v8.tar && tar -zxvf v8.tar && rm -f v8.tar \
+    && wget https://github.com/humanmade/alpine-v8/releases/download/8.0.426.27/v8.tar && tar -zxvf v8.tar -C /usr && rm -f v8.tar \
 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd \
