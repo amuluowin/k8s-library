@@ -58,7 +58,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     ) \
     && rm -rf swoole \
 
-    && git clone https://gitee.com/laoyaosu/idgenerator.git \
+    && git clone https://github.com/yitter/IdGenerator.git \
     && (\
         cd ./idgenerator/PHP \
         && phpize \
