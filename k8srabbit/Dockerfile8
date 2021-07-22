@@ -54,7 +54,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && rm -f swoole.tar.gz \
     && ( \
         cd swoole \
-        && phpize && ./configure --enable-openssl --enable-sockets --enable-mysqlnd --enable-http2 --enable-swoole-json --enable-swoole-curl \
+        && phpize && ./configure --enable-openssl --enable-sockets --enable-mysqlnd --enable-http2 --enable-swoole-json --enable-swoole-curl --enable-cares\
         && make -j$(nproc) && make install \
     ) \
     && rm -rf swoole \
