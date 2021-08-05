@@ -68,9 +68,18 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && make install \
     )  && rm -rf IdGenerator \
 
+    && git clone https://github.com/crazyxman/simdjson_php.git \
+    && (\
+        cd ./simdjson_php \
+        && phpize \
+        && ./configure \
+        && make -j \
+        && make install \
+    )  && rm -rf simdjson_php \
+
     && mkdir -p /data \
     
-    && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowdrift swoole http redis v8js\
+    && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowdrift swoole http redis v8js simdjson\
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
 
     && apk del .build-deps \
