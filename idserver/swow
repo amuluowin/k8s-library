@@ -61,34 +61,19 @@ function run(string $host, int $port): void
                                     $wid = isset($params['wid']) ? (int)$params['wid'] : $worker_id;
                                     $num = isset($params['num']) ? (int)$params['num'] : 1;
                                     if ($num > 1) {
-                                        $ids = json_encode(\SnowDrift::NextNumId($num, $wid));
-                                        $writableSize = $body->getWritableSize();
-                                        if ($writableSize < strlen($ids)) {
-                                            $body->realloc($body->tell() + $writableSize);
-                                        }
-                                        $body->write($ids);
-                                        $response = sprintf(
-                                            "HTTP/1.1 200 OK\r\n" .
-                                                "Content-Type: application/json\r\n" .
-                                                "Connection: %s\r\n" .
-                                                "Content-Length: %d\r\n\r\n" .
-                                                '%s',
-                                            $parser->shouldKeepAlive() ? 'Keep-Alive' : 'Closed',
-                                            $body ? $body->getLength() : 0,
-                                            $body ? $body->toString() : ''
-                                        );
+                                        $body->write(implode(',', \SnowDrift::NextNumId($num, $wid)));
                                     } else {
                                         $body->write((string)SnowDrift::NextId($wid));
-                                        $response = sprintf(
-                                            "HTTP/1.1 200 OK\r\n" .
-                                                "Connection: %s\r\n" .
-                                                "Content-Length: %d\r\n\r\n" .
-                                                '%s',
-                                            $parser->shouldKeepAlive() ? 'Keep-Alive' : 'Closed',
-                                            $body ? $body->getLength() : 0,
-                                            $body ? $body->toString() : ''
-                                        );
                                     }
+                                    $response = sprintf(
+                                        "HTTP/1.1 200 OK\r\n" .
+                                            "Connection: %s\r\n" .
+                                            "Content-Length: %d\r\n\r\n" .
+                                            '%s',
+                                        $parser->shouldKeepAlive() ? 'Keep-Alive' : 'Closed',
+                                        $body ? $body->getLength() : 0,
+                                        $body ? $body->toString() : ''
+                                    );
                                 } else {
                                     $response = packResponse(404, [
                                         "Connection" => $parser->shouldKeepAlive() ? 'Keep-Alive' : 'Closed',
