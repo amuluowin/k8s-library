@@ -34,7 +34,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
         && ./configure \
         && make -j \
         && make install \
-        && echo -e "snowdrift.WorkerIdNum=63\nsnowdrift.SeqBitLength=10\nsnowdrift.TopOverCostCount=10000" >> /usr/local/etc/php/conf.d/docker-php-ext-snowdrift.ini \
+        && echo -e "snowdrift.WorkerIdNum=63\nsnowdrift.SeqBitLength=10\nsnowdrift.TopOverCostCount=10000\nsnowdrift.Multi=1" >> /usr/local/etc/php/conf.d/docker-php-ext-snowdrift.ini \
         && composer require swow/swow dev-develop -o && ./vendor/bin/swow-builder \
     )  && rm -rf idgenerator \
 
