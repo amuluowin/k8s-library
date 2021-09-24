@@ -26,7 +26,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     git \
     curl-dev \
     yaml-dev \
-    # libxml2-dev \
+    libxml2-dev \
     openssl-dev \
     freetype-dev \
     libjpeg-turbo-dev \
@@ -81,6 +81,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     
     && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowdrift swoole http redis v8js simdjson\
     && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
+    && echo -e "snowdrift.WorkerIdNum=63\nsnowdrift.SeqBitLength=10\nsnowdrift.TopOverCostCount=10000\nsnowdrift.Lock=1\nsnowdrift.Multi=1" >> /usr/local/etc/php/conf.d/docker-php-ext-snowdrift.ini \
 
     && apk del .build-deps \
     && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/*
