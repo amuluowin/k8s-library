@@ -9,7 +9,6 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY --from=builder /mimalloc-2.0.2/build/*.so.* /lib
 RUN ln -s /lib/libmimalloc.so.* /lib/libmimalloc.so
 ENV LD_PRELOAD=/lib/libmimalloc.so
-ENV MIMALLOC_LARGE_OS_PAGES=1
 
 RUN  sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
