@@ -1,6 +1,6 @@
 FROM alpine as builder
 RUN apk add wget build-base cmake linux-headers
-RUN cd /; wget https://github.com/microsoft/mimalloc/archive/refs/tags/v2.0.2.tar.gz; tar -zxvf v2.0.2.tar.gz; cd v2.0.2; mkdir build; cd build; cmake ..; make -j$(nproc); make install
+RUN cd /; wget https://github.com/microsoft/mimalloc/archive/refs/tags/v2.0.2.tar.gz; tar -zxvf v2.0.2.tar.gz; cd mimalloc-2.0.2; mkdir build; cd build; cmake ..; make -j$(nproc); make install
 
 FROM php:7-cli-alpine
 
