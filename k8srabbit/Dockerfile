@@ -6,7 +6,7 @@ RUN cd / && wget https://github.com/microsoft/mimalloc/archive/refs/tags/v2.0.2.
 FROM php:7-cli-alpine
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-COPY --from=builder /mimalloc/build/*.so.* /lib
+COPY --from=builder /mimalloc-2.0.2/build/*.so.* /lib
 RUN ln -s /lib/libmimalloc.so.* /lib/libmimalloc.so
 ENV LD_PRELOAD=/lib/libmimalloc.so
 ENV MIMALLOC_LARGE_OS_PAGES=1
@@ -33,6 +33,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     libcurl \
     icu-dev \
     git \
+    wget \
     curl-dev \
     yaml-dev \
     libxml2-dev \
