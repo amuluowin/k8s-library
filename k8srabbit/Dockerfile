@@ -1,6 +1,14 @@
+FROM alpine as builder
+RUN apk add wget build-base cmake linux-headers
+RUN cd /; wget https://github.com/microsoft/mimalloc/archive/refs/tags/v2.0.2.tar.gz; tar -zxvf v2.0.2.tar.gz; cd v2.0.2; mkdir build; cd build; cmake ..; make -j$(nproc); make install
+
 FROM php:7-cli-alpine
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
+COPY --from=builder /mimalloc/build/*.so.* /lib
+RUN ln -s /lib/libmimalloc.so.* /lib/libmimalloc.so
+ENV LD_PRELOAD=/lib/libmimalloc.so
+ENV MIMALLOC_LARGE_OS_PAGES=1
 
 RUN  sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
