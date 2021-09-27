@@ -1,4 +1,5 @@
 FROM alpine as builder
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 RUN apk add wget build-base cmake linux-headers
 RUN cd / && wget https://github.com/microsoft/mimalloc/archive/refs/tags/v2.0.2.tar.gz && tar -zxvf v2.0.2.tar.gz && cd mimalloc-2.0.2 && mkdir build && cd build && cmake .. && make -j$(nproc) && make install
 
