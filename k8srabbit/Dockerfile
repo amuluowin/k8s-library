@@ -91,6 +91,6 @@ WORKDIR /data
 
 EXPOSE 80
 
-ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.1
+ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.2
 
 CMD ["php", "bin/rabbit", "async:server","start"]
