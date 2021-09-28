@@ -9,7 +9,7 @@ RUN sed -i 's/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sourc
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY --from=builder /opt/libv8-7.9 /opt/libv8
 
-RUN apt-get update -y --fix-missing && apt-get install -y --no-install-recommends \
+RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y --no-install-recommends \
     build-essential \
     git \
     wget \
@@ -26,7 +26,7 @@ RUN apt-get update -y --fix-missing && apt-get install -y --no-install-recommend
     libmcrypt-dev \
     libgmp-dev \
     libffi-dev \
-    libjemalloc2 \
+    libjemalloc-dev \
 
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
@@ -86,13 +86,12 @@ RUN apt-get update -y --fix-missing && apt-get install -y --no-install-recommend
     && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* /var/lib/apt/lists/* \
     && apt-get remove build-essential git wget -y \
     && apt-get autoremove -y
-    && echo "/usr/lib/x86_64-linux-gnu/libjemalloc.so.2" > /etc/ld.so.preload
+    && echo "/usr/lib/x86_64-linux-gnu/libjemalloc.so" > /etc/ld.so.preload && chmod 0644 /etc/ld.so.preload
 
 WORKDIR /data
 
 EXPOSE 80
 
-ENV USE_ZEND_ALLOC 0
-ENV MALLOC_CONF background_thread:true,dirty_decay_ms:0,muzzy_decay_ms:0
+ENV LD_PRELOAD='/usr/lib/x86_64-linux-gnu/libjemalloc.so' USE_ZEND_ALLOC=0 MALLOC_CONF='background_thread:true,dirty_decay_ms:0,muzzy_decay_ms:0'
 
 CMD ["php", "bin/rabbit", "async:server","start"]

@@ -2,7 +2,7 @@ FROM php:8-cli-alpine
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN  sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && echo -e 'https://mirrors.aliyun.com/alpine/edge/testing' >> /etc/apk/repositories
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && echo -e 'https://mirrors.aliyun.com/alpine/edge/testing' >> /etc/apk/repositories
 
 RUN apk update && apk add --no-cache --virtual .build-deps \
     g++ \
@@ -96,12 +96,13 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
 
     && apk del .build-deps \
     && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/*
+    && echo -e "/usr/local/lib/libmimalloc.so" > /etc/ld.so.preload && chmod 0644 /etc/ld.so.preload
 
 
 WORKDIR /data
 
 EXPOSE 80
 
-ENV LD_PRELOAD=/usr/local/lib/libmimalloc.so php
+ENV USE_ZEND_ALLOC=0 LD_PRELOAD='/usr/local/lib/libmimalloc.so'
 
 CMD ["php", "bin/rabbit", "async:server","start"]
