@@ -91,6 +91,8 @@ WORKDIR /data
 
 EXPOSE 80
 
-ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.2
+ENV LD_PRELOAD = /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
+ENV USE_ZEND_ALLOC = 0
+ENV MALLOC_CONF = background_thread:true,dirty_decay_ms:0,muzzy_decay_ms:0
 
 CMD ["php", "bin/rabbit", "async:server","start"]
