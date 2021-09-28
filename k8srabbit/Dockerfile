@@ -86,13 +86,13 @@ RUN apt-get update -y --fix-missing && apt-get install -y --no-install-recommend
     && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* /var/lib/apt/lists/* \
     && apt-get remove build-essential git wget -y \
     && apt-get autoremove -y
+    && echo "/usr/lib/x86_64-linux-gnu/libjemalloc.so.2" > /etc/ld.so.preload
 
 WORKDIR /data
 
 EXPOSE 80
 
-ENV LD_PRELOAD = /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
-ENV USE_ZEND_ALLOC = 0
-ENV MALLOC_CONF = background_thread:true,dirty_decay_ms:0,muzzy_decay_ms:0
+ENV USE_ZEND_ALLOC 0
+ENV MALLOC_CONF background_thread:true,dirty_decay_ms:0,muzzy_decay_ms:0
 
 CMD ["php", "bin/rabbit", "async:server","start"]
