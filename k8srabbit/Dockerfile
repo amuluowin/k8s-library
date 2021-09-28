@@ -85,7 +85,7 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
 
     && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* /var/lib/apt/lists/* \
     && apt-get remove build-essential git wget -y \
-    && apt-get autoremove -y
+    && apt-get autoremove -y \
     && echo "/usr/lib/x86_64-linux-gnu/libjemalloc.so" > /etc/ld.so.preload && chmod 0644 /etc/ld.so.preload
 
 WORKDIR /data
