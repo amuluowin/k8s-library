@@ -1,60 +1,44 @@
-FROM alpine as builder
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
-RUN apk add wget build-base cmake linux-headers
-RUN cd / && wget https://github.com/microsoft/mimalloc/archive/refs/tags/v2.0.2.tar.gz && tar -zxvf v2.0.2.tar.gz && cd mimalloc-2.0.2 && mkdir build && cd build && cmake .. && make -j$(nproc) && make install
+FROM stesie/libv8-7.9 AS builder
 
-FROM php:7-cli-alpine
+FROM php:8-cli-bullseye
+
+RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list
+
+RUN sed -i 's/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list
+
+ENV V8_VERSION=7.5.288.23
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-COPY --from=builder /mimalloc-2.0.2/build/*.so.* /lib
-RUN ln -s /lib/libmimalloc.so.* /lib/libmimalloc.so
-# ENV LD_PRELOAD=/lib/libmimalloc.so
+COPY --from=builder /opt/libv8-7.9 /opt/libv8
 
-RUN  sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
-
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
-
-RUN apk update && apk add --no-cache --virtual .build-deps \
-    g++ \
-    gcc \
-    make \
-    cmake \
-    autoconf \
-    libmcrypt-dev \
-    libc-dev \
-    linux-headers \
-    libaio-dev \
-    zlib-dev \
-    tzdata \
-    bash \
-    && apk add --no-cache \
-    c-ares-dev \
-    libcurl \
-    icu-dev \
+RUN apt-get update -y --fix-missing && apt-get install -y --no-install-recommends \
+    build-essential \
     git \
     wget \
-    curl-dev \
-    yaml-dev \
+    zlib1g-dev \
+    libc-ares-dev \
+    libcurl4-openssl-dev \
+    libyaml-dev \
     libxml2-dev \
-    openssl-dev \
-    freetype-dev \
-    libjpeg-turbo-dev \
+    libssl-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
     libpng-dev \
     libzip-dev \
     libmcrypt-dev \
-    gmp-dev \
+    libgmp-dev \
+    libffi-dev \
+    libjemalloc2 \
 
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
     && chmod a+x /usr/bin/composer \
 
-    && wget https://github.com/humanmade/alpine-v8/releases/download/7.5.288.23/v8.tar && tar -xvf v8.tar -C /usr && rm -f v8.tar \
-
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd \
-    && pecl install msgpack inotify igbinary yaml raphf propro xlswriter redis v8js \
-    && docker-php-ext-enable raphf propro \
-    && pecl install pecl_http-3.2.4 \
+    && pecl install msgpack inotify igbinary yaml raphf xlswriter redis \
+    && docker-php-ext-enable raphf \
+    && pecl install pecl_http \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
 
     && wget https://github.com/swoole/swoole-src/archive/v4.7.1.tar.gz -O swoole.tar.gz \
@@ -72,10 +56,19 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && (\
         cd ./IdGenerator/PHP \
         && phpize \
-        && ./configure \
-        && make -j \
+        && ./configure --with-v8js=\
+        && make -j$(nproc) \
         && make install \
     )  && rm -rf IdGenerator \
+
+    && git clone https://github.com/amuluowin/v8js.git \
+    && (\
+        cd v8js \
+        && phpize \
+        && ./configure --with-v8js=/opt/libv8 LDFLAGS="-lstdc++" CPPFLAGS="-DV8_COMPRESS_POINTERS" \
+        && make -j$(nproc) \
+        && make install \
+    )  && rm -rf v8js /opt/libv8 \
 
     && git clone https://github.com/crazyxman/simdjson_php.git \
     && (\
@@ -88,16 +81,18 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
 
     && mkdir -p /data \
     
-    && docker-php-ext-enable opcache msgpack yaml inotify xlswriter igbinary snowdrift swoole http redis v8js simdjson\
-    && echo -e "opcache.enable=1\nopcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
+    && docker-php-ext-enable opcache yaml igbinary xlswriter snowdrift swoole msgpack http redis v8js simdjson\
+    && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1205\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && echo -e "snowdrift.WorkerIdNum=63\nsnowdrift.SeqBitLength=10\nsnowdrift.TopOverCostCount=10000\nsnowdrift.Lock=1\nsnowdrift.Multi=1" >> /usr/local/etc/php/conf.d/docker-php-ext-snowdrift.ini \
 
-    && apk del .build-deps \
-    && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/*
-    
+    && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* /var/lib/apt/lists/* \
+    && apt-get remove build-essential git wget \
+    && apt-get autoremove
 
 WORKDIR /data
 
 EXPOSE 80
+
+ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.1
 
 CMD ["php", "bin/rabbit", "async:server","start"]
