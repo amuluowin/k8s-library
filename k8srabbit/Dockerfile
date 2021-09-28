@@ -84,8 +84,8 @@ RUN apt-get update -y --fix-missing && apt-get install -y --no-install-recommend
     && echo -e "snowdrift.WorkerIdNum=63\nsnowdrift.SeqBitLength=10\nsnowdrift.TopOverCostCount=10000\nsnowdrift.Lock=1\nsnowdrift.Multi=1" >> /usr/local/etc/php/conf.d/docker-php-ext-snowdrift.ini \
 
     && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* /var/lib/apt/lists/* \
-    && apt-get remove build-essential git wget \
-    && apt-get autoremove
+    && apt-get remove build-essential git wget -y \
+    && apt-get autoremove -y
 
 WORKDIR /data
 
