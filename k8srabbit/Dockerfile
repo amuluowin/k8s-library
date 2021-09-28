@@ -6,8 +6,6 @@ RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.li
 
 RUN sed -i 's/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list
 
-ENV V8_VERSION=7.5.288.23
-
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY --from=builder /opt/libv8-7.9 /opt/libv8
 
@@ -68,7 +66,7 @@ RUN apt-get update -y --fix-missing && apt-get install -y --no-install-recommend
         && ./configure --with-v8js=/opt/libv8 LDFLAGS="-lstdc++" CPPFLAGS="-DV8_COMPRESS_POINTERS" \
         && make -j$(nproc) \
         && make install \
-    )  && rm -rf v8js /opt/libv8 \
+    )  && rm -rf v8js \
 
     && git clone https://github.com/crazyxman/simdjson_php.git \
     && (\
