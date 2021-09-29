@@ -18,7 +18,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     tzdata \
     bash \
     && apk add --no-cache \
-    mimalloc2 \
+    mimalloc2-dev \
     c-ares-dev \
     libcurl \
     icu-dev \
@@ -96,13 +96,13 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
 
     && apk del .build-deps \
     && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* \
-    && echo -e "/usr/local/lib/libmimalloc.so" > /etc/ld.so.preload && chmod 0644 /etc/ld.so.preload
+    && echo -e "/usr/lib/libmimalloc.so" > /etc/ld.so.preload && chmod 0644 /etc/ld.so.preload
 
 
 WORKDIR /data
 
 EXPOSE 80
 
-ENV USE_ZEND_ALLOC=0 LD_PRELOAD='/usr/local/lib/libmimalloc.so'
+ENV USE_ZEND_ALLOC=0 LD_PRELOAD='/usr/lib/libmimalloc.so'
 
 CMD ["php", "bin/rabbit", "async:server","start"]
