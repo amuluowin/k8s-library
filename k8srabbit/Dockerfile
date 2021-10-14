@@ -1,5 +1,3 @@
-FROM stesie/libv8-7.9 AS builder
-
 FROM php:8-cli-bullseye
 
 RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list
@@ -7,7 +5,7 @@ RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.li
 RUN sed -i 's/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-COPY --from=builder /opt/libv8-7.9 /opt/libv8
+# COPY --from=stesie/libv8-7.9 /opt/libv8-7.9 /opt/libv8
 
 RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y --no-install-recommends \
     build-essential \
@@ -39,7 +37,7 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
     && pecl install pecl_http \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
 
-    && wget https://github.com/swoole/swoole-src/archive/v4.7.1.tar.gz -O swoole.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v4.8.0.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm -f swoole.tar.gz \
@@ -59,14 +57,14 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
         && make install \
     )  && rm -rf IdGenerator \
 
-    && git clone https://github.com/amuluowin/v8js.git \
-    && (\
-        cd v8js \
-        && phpize \
-        && ./configure --with-v8js=/opt/libv8 LDFLAGS="-lstdc++" CPPFLAGS="-DV8_COMPRESS_POINTERS" \
-        && make -j$(nproc) \
-        && make install \
-    )  && rm -rf v8js \
+    # && git clone https://github.com/amuluowin/v8js.git \
+    # && (\
+    #     cd v8js \
+    #     && phpize \
+    #     && ./configure --with-v8js=/opt/libv8 LDFLAGS="-lstdc++" CPPFLAGS="-DV8_COMPRESS_POINTERS" \
+    #     && make -j$(nproc) \
+    #     && make install \
+    # )  && rm -rf v8js \
 
     && git clone https://github.com/crazyxman/simdjson_php.git \
     && (\
@@ -79,7 +77,7 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
 
     && mkdir -p /data \
     
-    && docker-php-ext-enable opcache yaml igbinary xlswriter snowdrift swoole msgpack http redis v8js simdjson\
+    && docker-php-ext-enable opcache yaml igbinary xlswriter snowdrift swoole msgpack http redis simdjson\
     && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1205\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && echo -e "snowdrift.WorkerIdNum=63\nsnowdrift.SeqBitLength=10\nsnowdrift.TopOverCostCount=10000\nsnowdrift.Lock=1\nsnowdrift.Multi=1" >> /usr/local/etc/php/conf.d/docker-php-ext-snowdrift.ini \
 
