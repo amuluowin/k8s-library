@@ -12,18 +12,16 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     linux-headers \
     libaio-dev \
     zlib-dev \
-    tzdata \
-    bash \
     git \
     ninja \
     && git clone https://github.com/amuluowin/boringssl.git && cd boringssl && mkdir build && cd build && cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DOPENSSL_SMALL=1 .. && ninja -j$(nproc) \
-    && cd / && mkdir -p openssl/lib && cp -r /boringssl/include openssl/include && cp /boringssl/build/crypto/libcrypto.a /boringssl/build/ssl/libssl.a openssl/lib
-
+    && cd / && mkdir -p openssl/lib && cp -r /boringssl/include openssl/include && cp /boringssl/build/crypto/libcrypto.a /boringssl/build/ssl/libssl.a openssl/lib \
+    && tar -czf openssl.tar.gz
 
 FROM php:8-cli-alpine
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-COPY --from=builder openssl/* /boringssl/openssl/
+COPY --from=builder openssl.tar.gz /
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && echo -e 'https://mirrors.aliyun.com/alpine/edge/testing' >> /etc/apk/repositories
 
@@ -83,11 +81,12 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     #     && make -j$(nproc) && make install \
     # ) \
     # && rm -rf swoole \
+    && tar -xzvf openssl.tar.gz \
 
     && git clone https://github.com/amuluowin/swoole-src.git \
     && ( \
         cd swoole-src \
-        && phpize && ./configure --enable-openssl --enable-boringssl --enable-sockets --enable-mysqlnd --enable-http2 --enable-swoole-json --enable-swoole-curl --enable-cares --with-openssl-dir=/boringssl/openssl \
+        && phpize && ./configure --enable-openssl --enable-boringssl --enable-sockets --enable-mysqlnd --enable-http2 --enable-swoole-json --enable-swoole-curl --enable-cares --with-openssl-dir=/openssl \
         && make -j$(nproc) && make install \
     ) \
     && rm -rf swoole-src boringssl \
