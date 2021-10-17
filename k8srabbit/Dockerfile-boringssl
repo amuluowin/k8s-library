@@ -85,6 +85,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && tar -xzvf openssl.tar.gz \
 
     && git clone https://github.com/amuluowin/swoole-src.git \
+    && git checkout PR-Boringssl \
     && ( \
         cd swoole-src \
         && phpize && ./configure --enable-openssl --enable-boringssl --enable-sockets --enable-mysqlnd --enable-http2 --enable-swoole-json --enable-swoole-curl --enable-cares --with-openssl-dir=/openssl \
