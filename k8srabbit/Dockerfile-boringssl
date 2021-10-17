@@ -1,0 +1,135 @@
+FROM alpine as builder
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && echo -e 'https://mirrors.aliyun.com/alpine/edge/testing' >> /etc/apk/repositories
+RUN apk update && apk add --no-cache --virtual .build-deps \
+    build-base \
+    autoconf \
+    libmcrypt-dev \
+    libc-dev \
+    linux-headers \
+    libaio-dev \
+    zlib-dev \
+    tzdata \
+    bash \
+    git \
+    ninja \
+    && git clone https://github.com/amuluowin/boringssl.git && cd boringssl && mkdir build && cd build && cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DOPENSSL_SMALL=1 .. && ninja -j$(nproc) \
+    && cd / && mkdir -p openssl/lib && cp -r /boringssl/include openssl/include && cp /boringssl/build/crypto/libcrypto.a /boringssl/build/ssl/libssl.a openssl/lib
+
+
+FROM php:8-cli-alpine
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+COPY --from=builder openssl/* /boringssl/openssl/
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && echo -e 'https://mirrors.aliyun.com/alpine/edge/testing' >> /etc/apk/repositories
+
+RUN apk update && apk add --no-cache --virtual .build-deps \
+    g++ \
+    gcc \
+    make \
+    cmake \
+    autoconf \
+    libmcrypt-dev \
+    libc-dev \
+    linux-headers \
+    libaio-dev \
+    zlib-dev \
+    tzdata \
+    bash \
+    && apk add --no-cache \
+    mimalloc2-dev \
+    c-ares-dev \
+    libcurl \
+    icu-dev \
+    git \
+    wget \
+    curl-dev \
+    yaml-dev \
+    libxml2-dev \
+    openssl-dev \
+    freetype-dev \
+    libjpeg-turbo-dev \
+    libpng-dev \
+    libzip-dev \
+    libmcrypt-dev \
+    gmp-dev \
+    oniguruma-dev \
+    libffi-dev \
+
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo 'Asia/Shanghai' > /etc/timezone \
+    && chmod a+x /usr/bin/composer \
+
+    # && wget https://github.com/humanmade/alpine-v8/releases/download/7.5.288.23/v8.tar && tar -xvf v8.tar -C /usr && rm -f v8.tar \
+
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd \
+    && pecl install msgpack inotify igbinary yaml raphf xlswriter redis \
+    && docker-php-ext-enable raphf \
+    && pecl install pecl_http \
+    && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
+
+    # && wget https://github.com/swoole/swoole-src/archive/v4.8.0.tar.gz -O swoole.tar.gz \
+    # && mkdir -p swoole \
+    # && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
+    # && rm -f swoole.tar.gz \
+    # && ( \
+    #     cd swoole \
+    #     && phpize && ./configure --enable-openssl --enable-sockets --enable-mysqlnd --enable-http2 --enable-swoole-json --enable-swoole-curl --enable-cares\
+    #     && make -j$(nproc) && make install \
+    # ) \
+    # && rm -rf swoole \
+
+    && git clone https://github.com/amuluowin/swoole-src.git \
+    && ( \
+        cd swoole-src \
+        && phpize && ./configure --enable-openssl --enable-boringssl --enable-sockets --enable-mysqlnd --enable-http2 --enable-swoole-json --enable-swoole-curl --enable-cares --with-openssl-dir=/boringssl/openssl \
+        && make -j$(nproc) && make install \
+    ) \
+    && rm -rf swoole-src boringssl \
+
+    && git clone https://github.com/yitter/IdGenerator.git \
+    && (\
+        cd ./IdGenerator/PHP \
+        && phpize \
+        && ./configure \
+        && make -j$(nproc) \
+        && make install \
+    )  && rm -rf IdGenerator \
+
+    # && git clone https://github.com/amuluowin/v8js.git \
+    # && (\
+    #     cd v8js \
+    #     && phpize \
+    #     && ./configure \
+    #     && make -j$(nproc) \
+    #     && make install \
+    # )  && rm -rf v8js \
+
+    && git clone https://github.com/crazyxman/simdjson_php.git \
+    && (\
+        cd ./simdjson_php \
+        && phpize \
+        && ./configure \
+        && make -j \
+        && make install \
+    )  && rm -rf simdjson_php \
+
+    && mkdir -p /data \
+    
+    && docker-php-ext-enable opcache yaml igbinary xlswriter snowdrift swoole msgpack http redis simdjson\
+    && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1205\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
+    && echo -e "snowdrift.WorkerIdNum=63\nsnowdrift.SeqBitLength=10\nsnowdrift.TopOverCostCount=10000\nsnowdrift.Lock=1\nsnowdrift.Multi=1" >> /usr/local/etc/php/conf.d/docker-php-ext-snowdrift.ini \
+
+    && apk del .build-deps \
+    && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* \
+    && echo -e "/usr/lib/libmimalloc.so" > /etc/ld.so.preload && chmod 0644 /etc/ld.so.preload
+
+
+WORKDIR /data
+
+EXPOSE 80
+
+ENV USE_ZEND_ALLOC=0 LD_PRELOAD='/usr/lib/libmimalloc.so'
+
+CMD ["php", "bin/rabbit", "async:server","start"]
