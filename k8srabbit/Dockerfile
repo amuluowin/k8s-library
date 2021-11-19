@@ -32,7 +32,7 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd \
-    && pecl install msgpack inotify igbinary yaml raphf xlswriter redis \
+    && pecl install msgpack inotify igbinary yaml raphf xlswriter redis yac\
     && docker-php-ext-enable raphf \
     && pecl install pecl_http \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
@@ -77,9 +77,10 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
 
     && mkdir -p /data \
     
-    && docker-php-ext-enable opcache yaml igbinary xlswriter snowdrift swoole msgpack http redis simdjson\
+    && docker-php-ext-enable opcache yaml igbinary xlswriter snowdrift swoole msgpack http redis simdjson yac\
     && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1205\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && echo -e "snowdrift.WorkerIdNum=63\nsnowdrift.SeqBitLength=10\nsnowdrift.TopOverCostCount=10000\nsnowdrift.Lock=1\nsnowdrift.Multi=1" >> /usr/local/etc/php/conf.d/docker-php-ext-snowdrift.ini \
+    && echo -e "yac.enable_cli=1\nyac.serializer=igbinary" >> /usr/local/etc/php/conf.d/docker-php-ext-yac.ini \
 
     && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* /var/lib/apt/lists/* \
     && apt-get remove build-essential git wget -y \
