@@ -14,7 +14,6 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
     zlib1g-dev \
     libc-ares-dev \
     libcurl4-openssl-dev \
-    libyaml-dev \
     libxml2-dev \
     libssl-dev \
     libfreetype6-dev \
@@ -32,12 +31,12 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd \
-    && pecl install msgpack inotify igbinary yaml raphf xlswriter redis yac\
+    && pecl install msgpack inotify igbinary raphf xlswriter redis yac\
     && docker-php-ext-enable raphf \
     && pecl install pecl_http \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
 
-    && wget https://github.com/swoole/swoole-src/archive/v4.8.6.tar.gz -O swoole.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v4.8.7.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm -f swoole.tar.gz \
@@ -77,10 +76,10 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
 
     && mkdir -p /data \
     
-    && docker-php-ext-enable opcache yaml igbinary xlswriter snowdrift swoole msgpack http redis simdjson yac\
+    && docker-php-ext-enable opcache igbinary xlswriter snowdrift swoole msgpack http redis simdjson yac\
     && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1205\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && echo -e "snowdrift.WorkerIdNum=63\nsnowdrift.SeqBitLength=10\nsnowdrift.TopOverCostCount=10000\nsnowdrift.Lock=1\nsnowdrift.Multi=1" >> /usr/local/etc/php/conf.d/docker-php-ext-snowdrift.ini \
-    && echo -e "yac.enable_cli=1\nyac.values_memory_size = 256M\nyac.serializer=igbinary" >> /usr/local/etc/php/conf.d/docker-php-ext-yac.ini \
+    && echo -e "yac.enable_cli=1\nyac.values_memory_size = 256M\nyac.serializer=msgpack" >> /usr/local/etc/php/conf.d/docker-php-ext-yac.ini \
 
     && pecl clear-cache && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /tmp/pear/* /var/lib/apt/lists/* \
     && apt-get remove build-essential git wget -y \
