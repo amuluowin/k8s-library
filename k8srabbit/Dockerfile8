@@ -43,8 +43,8 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     # && wget https://github.com/humanmade/alpine-v8/releases/download/7.5.288.23/v8.tar && tar -xvf v8.tar -C /usr && rm -f v8.tar \
 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd mongodb\
-    && pecl install msgpack inotify igbinary raphf xlswriter redis yac\
+    && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd\
+    && pecl install msgpack inotify igbinary raphf xlswriter redis yac mongodb\
     && docker-php-ext-enable raphf \
     && pecl install pecl_http \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \

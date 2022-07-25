@@ -30,8 +30,8 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
     && chmod a+x /usr/bin/composer \
 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd mongodb\
-    && pecl install msgpack inotify igbinary raphf xlswriter redis yac\
+    && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd\
+    && pecl install msgpack inotify igbinary raphf xlswriter redis yac mongodb\
     && docker-php-ext-enable raphf \
     && pecl install pecl_http \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
