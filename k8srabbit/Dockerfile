@@ -30,7 +30,7 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
     && chmod a+x /usr/bin/composer \
 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd \
+    && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd mongodb\
     && pecl install msgpack inotify igbinary raphf xlswriter redis yac\
     && docker-php-ext-enable raphf \
     && pecl install pecl_http \
@@ -76,7 +76,7 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
 
     && mkdir -p /data \
     
-    && docker-php-ext-enable opcache igbinary xlswriter snowdrift swoole msgpack http redis simdjson yac\
+    && docker-php-ext-enable opcache igbinary xlswriter snowdrift swoole msgpack http redis simdjson yac mongodb\
     && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1205\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && echo -e "snowdrift.WorkerIdNum=63\nsnowdrift.SeqBitLength=10\nsnowdrift.TopOverCostCount=10000\nsnowdrift.Lock=1\nsnowdrift.Multi=1" >> /usr/local/etc/php/conf.d/docker-php-ext-snowdrift.ini \
     && echo -e "yac.enable_cli=1\nyac.values_memory_size = 256M\nyac.serializer=msgpack" >> /usr/local/etc/php/conf.d/docker-php-ext-yac.ini \

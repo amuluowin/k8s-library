@@ -65,14 +65,14 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     # && wget https://github.com/humanmade/alpine-v8/releases/download/7.5.288.23/v8.tar && tar -xvf v8.tar -C /usr && rm -f v8.tar \
 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd \
+    && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd mongodb\
     && pecl install msgpack inotify igbinary raphf xlswriter redis yac\
     && docker-php-ext-enable raphf \
     && pecl install pecl_http \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
 
     && tar -xzvf openssl.tar.gz \
-    && wget https://github.com/swoole/swoole-src/archive/v4.8.10.tar.gz -O swoole.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v4.8.11.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm -f swoole.tar.gz openssl.tar.gz \
@@ -112,7 +112,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
 
     && mkdir -p /data \
     
-    && docker-php-ext-enable opcache igbinary xlswriter snowdrift swoole msgpack http redis simdjson yac\
+    && docker-php-ext-enable opcache igbinary xlswriter snowdrift swoole msgpack http redis simdjson yac mongodb\
     && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1205\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && echo -e "snowdrift.WorkerIdNum=63\nsnowdrift.SeqBitLength=10\nsnowdrift.TopOverCostCount=10000\nsnowdrift.Lock=1\nsnowdrift.Multi=1" >> /usr/local/etc/php/conf.d/docker-php-ext-snowdrift.ini \
     && echo -e "yac.enable_cli=1\nyac.values_memory_size = 256M\nyac.serializer=msgpack" >> /usr/local/etc/php/conf.d/docker-php-ext-yac.ini \
