@@ -65,14 +65,15 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
     #     && make install \
     # )  && rm -rf v8js \
 
-    && git clone https://github.com/crazyxman/simdjson_php.git \
+    && wget https://github.com/crazyxman/simdjson_php/releases/download/2.0.0/simdjson-2.0.0.tgz -O simdjson.tgz \
+    && mkdir -p simdjson \
+    && tar -zxvf simdjson.tgz -C simdjson --strip-components=1 \
+    && rm -f simdjson.tgz \
     && (\
-        cd ./simdjson_php \
-        && phpize \
-        && ./configure \
-        && make -j \
-        && make install \
-    )  && rm -rf simdjson_php \
+        cd ./simdjson \
+        && phpize && ./configure \
+        && make -j && make install \
+    )  && rm -rf simdjson \
 
     && mkdir -p /data \
     
