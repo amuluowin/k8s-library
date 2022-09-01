@@ -31,7 +31,7 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
 
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) pdo_mysql bcmath opcache sockets zip gmp gd\
-    && pecl install msgpack inotify igbinary raphf xlswriter redis yac mongodb\
+    && pecl install msgpack inotify igbinary raphf xlswriter redis yac mongodb simdjson\
     && docker-php-ext-enable raphf \
     && pecl install pecl_http \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
@@ -64,18 +64,6 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
     #     && make -j$(nproc) \
     #     && make install \
     # )  && rm -rf v8js \
-
-    && wget https://github.com/crazyxman/simdjson_php/releases/download/2.0.0/simdjson-2.0.0.tgz -O simdjson.tgz \
-    && mkdir -p simdjson \
-    && tar -zxvf simdjson.tgz -C simdjson --strip-components=1 \
-    && rm -f simdjson.tgz \
-    && (\
-        cd ./simdjson \
-        && phpize && ./configure \
-        && make -j && make install \
-    )  && rm -rf simdjson \
-
-    && mkdir -p /data \
     
     && docker-php-ext-enable opcache igbinary xlswriter snowdrift swoole msgpack http redis simdjson yac mongodb\
     && echo -e "opcache.enable=1\nopcache.enable_cli=1\nopcache.jit=1205\nopcache.jit_buffer_size=128M" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
