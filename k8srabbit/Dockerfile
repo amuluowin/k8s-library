@@ -42,7 +42,7 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
     && rm -f swoole.tar.gz \
     && ( \
         cd swoole \
-        && phpize && ./configure --enable-openssl --enable-sockets --enable-mysqlnd --enable-http2 --enable-swoole-json --enable-swoole-curl --enable-cares --enable-thread-context\
+        && phpize && ./configure --enable-openssl --enable-sockets --enable-mysqlnd --enable-http2 --enable-swoole-json --enable-swoole-curl --enable-cares\
         && make -j$(nproc) && make install \
     ) \
     && rm -rf swoole \
