@@ -36,7 +36,7 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
     && pecl install pecl_http \
     && echo -e "extension=http.so" >> /usr/local/etc/php/conf.d/docker-php-ext-zhttp.ini \
 
-    && wget https://github.com/swoole/swoole-src/archive/v5.0.0.tar.gz -O swoole.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v5.0.1.tar.gz -O swoole.tar.gz \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && rm -f swoole.tar.gz \
@@ -51,7 +51,7 @@ RUN apt-get update -y --fix-missing && apt-get upgrade -y && apt-get install -y 
     && (\
         cd ./IdGenerator/PHP \
         && phpize \
-        && ./configure --with-v8js=\
+        && ./configure\
         && make -j$(nproc) \
         && make install \
     )  && rm -rf IdGenerator \
